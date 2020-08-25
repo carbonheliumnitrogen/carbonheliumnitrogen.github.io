@@ -23,7 +23,13 @@ a:hover {
     text-decoration: underline;
 }
 h1 {
-    font-size: 3em;
+    font-size: 2em;
+    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+}
+h2 {
+    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+}
+h3 {
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
 }
 p {
