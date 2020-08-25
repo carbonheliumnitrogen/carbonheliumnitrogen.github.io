@@ -22,6 +22,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
+header {
+    font-size: 3em;
+    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    color: #000;
+}
 h1 {
     font-size: 2em;
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
