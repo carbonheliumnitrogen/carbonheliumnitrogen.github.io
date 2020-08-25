@@ -22,7 +22,7 @@ a {
 a:hover {
     text-decoration: underline;
 }
-header {
+header ul {
     font-size: 3em;
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
     color: #000;
