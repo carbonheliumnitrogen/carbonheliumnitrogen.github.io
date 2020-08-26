@@ -13,18 +13,16 @@ header {
     font-weight: 400;
     text-transform: uppercase;
 }
-nav ul {
+nav ul, footer ul {
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
     padding-bottom: 20px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
     list-style: none;
     font-weight: bold;
 }
-footer ul {
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-}
+
 nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
