@@ -7,10 +7,11 @@ body {
     width: 70%;
 }
 header {
-    font-size: 2.781828em;
-    font-family:'Roboto Mono', 'Helvetica', 'Sans-Serif';
+    font-size: 1.6em;
+    font-family:'Roboto Mono', 'monospace';
     color: #000;
-    font-weight: bold;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 nav ul, footer ul {
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
