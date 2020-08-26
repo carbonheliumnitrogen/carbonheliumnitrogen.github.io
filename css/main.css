@@ -46,9 +46,9 @@ h3 {
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
 }
 p {
-    font-size: 1.5em;
+    font-size: 1em;
     font-family:'Roboto Slab', 'Serif';
-    line-height: 1.4em;
+    line-height: 0.9em;
     color: #333;
 }
 footer {
