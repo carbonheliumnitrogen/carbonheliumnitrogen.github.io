@@ -48,8 +48,10 @@ h3 {
 p {
     font-size: 1em;
     font-family:'Roboto', 'Sans-Serif';
-    line-height: 0.9em;
-    color: #333;
+    line-height: 1.1em;
+    color: #CCC;
+    text-align: justify;
+
 }
 footer {
     border-top: 1px solid #d5d5d5;
