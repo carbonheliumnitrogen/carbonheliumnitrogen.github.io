@@ -47,6 +47,8 @@ h3 {
 }
 h4 {
     font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    padding-bottom: -10px;
+    padding-top: -10px;
 }
 p {
     font-size: 1em;
