@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
 body {
     margin: 60px auto;
@@ -14,7 +15,7 @@ header {
     text-transform: uppercase;
 }
 nav ul, footer ul {
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
     padding-bottom: 20px;
     padding-top: 0px;
     padding-left: 0px;
@@ -37,22 +38,22 @@ a:hover {
 
 h1 {
     font-size: 2em;
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
 }
 h2 {
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
 }
 h3 {
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
 }
 h4 {
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
     margin-block-start: -1em;
     margin-block-end: 0em;
 }
 p {
     font-size: 1em;
-    font-family:'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
     line-height: 1.2em;
     color: #111;
     text-align: justify;
@@ -66,13 +67,13 @@ footer {
 ul.posts { 
     margin: 20px auto 40px; 
     font-size: 1.5em;
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
 }
 
 li { 
     margin: 20px auto 40px; 
     font-size: 1em;
-    font-family:'Roboto', 'Helvetica', 'Sans-Serif';
+    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
 }
 ul.posts li {
     list-style: none;
