@@ -15,7 +15,7 @@ header {
     text-transform: uppercase;
 }
 nav ul, footer ul {
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
     padding-bottom: 20px;
     padding-top: 0px;
     padding-left: 0px;
@@ -38,22 +38,22 @@ a:hover {
 
 h1 {
     font-size: 2em;
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
 }
 h2 {
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
 }
 h3 {
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
 }
 h4 {
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
     margin-block-start: -1em;
     margin-block-end: 0em;
 }
 p {
     font-size: 1em;
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
     line-height: 1.2em;
     color: #111;
     text-align: justify;
@@ -67,13 +67,13 @@ footer {
 ul.posts { 
     margin: 20px auto 40px; 
     font-size: 1.5em;
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
 }
 
 li { 
     margin: 20px auto 40px; 
     font-size: 1em;
-    font-family:'Noto Sans', 'Roboto', 'Sans-Serif';
+    font-family:'Noto Sans', 'Sans-Serif';
 }
 ul.posts li {
     list-style: none;
