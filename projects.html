@@ -37,17 +37,46 @@ text-align: center;
 <div>
 	<p id="headerone"> Here is a collection of projects that I've had the opportunity to work on during my time at UC Berkeley. Through these projects, I have found an appreciation for the intersection between 3D printing and composite materials; I believe that these two areas are representative of the current paradigm of engineering. Whether studying new materials or combining familiar materials in new ways, we have the capability to design and engineer structures and machines that can revolutionize the way we approach mundane tasks. And although I am investigating my passion at only a small scale, one drop in the bucket of the composites research that is being done across the world, I hope that my work will one day be part of the backdrop of engineering innovation.  <br> <br> I am especially grateful to Professor Lin and Professor Gu in the ME Department, as well as Dr. Jacqueline Elwood, my research supervisor, for giving me the opportunity to pursue this research. <br> <br></p>
 	
+	<h3>Effect of Build Parameters on the Material Properties of Printed Parts Produced by Multi-Jet Fusion</h3>
+	<h4>HP Labs, Palo Alto, CA</h4>
+	<p>Multi-jet fusion is a fascinating new form of powder-bed fusion printing. Instead of relying on a laser or other directed light source, liquid-state “printing agents” are dropped onto the powder bed using traditional inkjet nozzles much like those seen on 2D-printers. In particular, a carbon black-based fusing agent is jetted onto regions of the bed where solidification is desired, and a different detailing agent is dropped to inhibit fusing in other areas. When an overhead infrared lamp is then passed over the entire print bed, energy is absorbed by the fusing agent, building a layer of the printed part. The MJF process has incredible potential for directly fabricating large-scale polymer parts – there is no support material, and the only post-processing required involves cleaning unused powder from the surface of the finished part.</p>
+	<p> This project attempts a characterization effort that has never been seen in the present literature. It is known that varying the nesting parameters (e.g. print angle, print location) and physical parameters (e.g. part size, inter-part spacing) has an impact on the mechanical properties of the printed parts. However, these effects, which are due to complex interactions between the printing agents, applied power, and polymer material, are only “benchmarked” at a high level. To perform a thorough characterization of the print process across two materials (polyamide 11 and polyamide 12), we print a total of 1,485 specimens over nine printing buckets, varying the printing angle, nominal dimensions, and three-dimensional center location. We then test the specimens in tension, three-point bending, or impact, and use the results to characterize tensile and flexural strength and stiffness, elongation at break, and fracture energy as a function of our input parameters. To produce quantitative correlations in the data, we apply a normalization algorithm to isolate specimen data as a function of a particular variable, allowing us to uncover the trends we seek.</p>
+
+	<div id="row">
+	<figure>
+    		<img class="columntwo" src="6-a.png">
+		<figcaption> Representative cross-section images of fractured printed specimens (tension, top row; impact, bottom row).
+ </figcaption>
+	</figure>
+	<figure>
+    		<img class="columntwo" src="Poster_Fig_2.png">
+		<figcaption> Angle-based normalized material properties for polyamide (PA)-12, demonstrating the trends obtained from the printed specimens. 
+</figcaption>
+	</figure>
+</div>
+	
 	<h3>CFRP Composites: A Comparison of Manufacturing Methods on Mechanical Properties</h3>
 	<h4>Professor Grace Gu, UC Berkeley Department of Mechanical Engineering</h4>
 	<p>Composite materials present an attractive solution to the problem of material selection for many applications. In particular, carbon fiber-reinforced polymer (CFRP) composites are known for their high strength-to-weight and stiffness-to-weight ratios, which make them excellent structural materials. CFRP composites are used in a wide variety of industries; you'll see them in automobiles, boats, golf clubs, skateboards, and rockets. A recent development in the composites industry is the advent of additive manufacturing (AM) methods that can automate the fiber placement process. Compared to "traditional" methods like wet layups and compression molding, which often requires the use of an autoclave. Years of development of these "traditional" manufacturing methods have yielded well-known techniques that produce excellent finished products. But AM presents an attractive alternative, greatly reducing "hands-on" time needed with parts, realizing complicated geometries, and allowing for a high degree of repeatability. The question remains, however, of how the material properties of parts using new AM technologies compares with those of parts made using more "traditional" methods like a wet layup. (To make FDM printing of continuous fibers possible, 3D printers often combine the fibers with a thermoplastic material that provides printability at the expense of strength and stiffness.)</p>
 	<p> My research seeks to answer this question by directly comparing the material properties of a 3D-printed composite sample with a hand laid-up composite specimen (normalized to an equal fiber volume fraction). In addition to preliminary computations using equations developed in the literature, we use a twofold approach to sample comparison. Both the printed and handmade samples are simulated in tension, compression, and flexure using ANSYS, and the physical specimens undergo mechanical testing following ASTM standards. The results of this study will hopefully provide a fair point of comparision between the two methods as well as perspective on the viability of new AM technology for industrial applications.</p>
 	<p> <a href="https://doi.org/10.1016/j.ijlmm.2021.04.001"> Read the paper here! </a> </p>
 	
+<div id="row">
+	<figure>
+    		<img class="columntwo" src="D1.png">
+		<figcaption> Printed and hand-laid up composites were tested in tension and flexure following ASTM standards. The specimens in the center were painted and "speckled" to allow for digital image correlation of local strains. </figcaption>
+	</figure>
+	<figure>
+    		<img class="columntwo" src="D2.png">
+		<figcaption> Representative stress-strain curves obtained from testing. (a) Hand-layup tension specimens. (b) Printed tensile specimens. (c) Hand-layup flexure specimens. (d) Printed flexure specimens. (e) Detailed view of a tensile stress-strain curve corresponding to a hand-layup specimen that experienced distinct ply failures near ultimate failure (inset).  </figcaption>
+	</figure>
+</div>
   
 	<h3>Development of an Electrically Conductive Nanomaterial for SLA 3D Printing</h3>
 	<h4>Professor Liwei Lin, UC Berkeley Department of Mechanical Engineering</h4>
 	<p>Additive manufacturing using stereolithography (SLA) is a promising way of obtaining rapid prototypes with excellent (sub-millimeter) detail. Current research points to the use of SLA (and additive manufacturing in general) as a fabrication alternative to traditional soft lithography for microfluidics. The layer-by-layer nature of modern 3D printing processes suggests a viable alternative to soft lithography, which is by comparison quite time-consuming and labor-intensive. But the process of using a liquid resin necessarily limits the materials compatible with SLA. Notably, there are very few printable electrically-conductive materials. </p>
 	<p> My research project centers around the development of a conductive, 3D-printable multi-material resin that is compatible with commercial printers. The direct printing of so-called "multi-functional" devices using a composite material or a system of materials has been well explored using fused deposition modeling (FDM). However, SLA printing features dramatically improved resolution and surface finish quality, making it attractive for the field of microfluidics. As a simple demonstration of our printable conductive resin, a microfluidic capacitive pH sensor is in development.</p>
+	
 <div id="row">
 	<figure>
     		<img class="columntwo" src="A1.png">
@@ -58,35 +87,7 @@ text-align: center;
 		<figcaption> Early prototype of a multimaterial print. </figcaption>
 	</figure>
 </div>
-	
-	<h3>Custom Facial Orthotics for Burn and Injury Survivors</h3>
-	<h4><a href="https://www.precisionpatientoutcomes.com/" target="_blank">Precision Patient Outcomes - Berkeley, CA</a></h4>
-	<p>Treatment for facial injuries involving scarring and skin regrowth, especially due to burns, is tricky - every face is unique, and no two individuals share the same facial geometry. Precision Patient Outcomes is a startup in Berkeley that aims to address this problem by manufacturing custom orthotic face masks for those that need them to assist in the healing process. Each patient's face is scanned in 3D using a custom and secure application. The scan files are cleaned up, filled in where necessary, and processed for machining. After the manufacturing step is completed, the patient recieves a wearable device contoured to their exact facial features, which greatly promotes recovery of the skin in a timely manner. My role in this process was to take patient data "from scanned to CAM-ed", and prepare the mesh files in preparation for the specialized manufacturing process we use.</p>
-	
-<p> In addition to existing infrastructure, 3D printing is an excellent candidate for producing mask molds in high resolution, in a highly automated and regular process. Compared to milling and other subtractive processes, AM also produces minimal waste; the thermoplastic resins used with commerical FDM printers can also be recycled. We are currently exploring the feasibility of introducing SLA printers to the mold making process to further improve the resolution and surface finish of parts. </p>
-	
-<div id="row">
-	<figure>
-    		<img class="columntwo" src="PPO.png" style="width:60%">
-		<figcaption> Prototype orthotic masks sit atop 3D-printed positive molds. Image taken from the PPO <a href="https://www.precisionpatientoutcomes.com/" target="_blank">website</a>.</figcaption>
-	</figure>
-</div>
-	<h3>3D-Printed Vertical Wind Turbine</h3>
-	<p>As the final project of a lower-division engineering course, a (small-scale) wind turbine was designed, simulated (Solidworks FEA), 3D printed (FDM), and tested for structure stiffness and power generation. Subject to weight, height, and print volume restrictions, the tower structure was designed to minimize deflection in a bending mode with an applied horizontal load. The turbine blade geometry was also optimized to maximize the output power with a constant wind source. Our tower structure was inspired by the bamboo plant, a naturally stiff structure. The round cross-section contributes to a high moment of inertia, allowing the "beam" to withstand a bending moment. </p>
-	<p> The turbine generated 1.25 watts of power in testing, and the structure had a stiffness of 3.8N/mm. </p>
-<div id="row">
-    <img class="column" src="B1.png" >
-    <img class="column" src="B3.png" >
-    <img class="column" src="B2.png" >
-</div>
-  <p id="bildtext"> CAD model (left); simulation result (middle); printed and assembled turbine before testing (right). </p>
 
-	<h3>PET Squeeze Bottle Prototyping</h3>
-	<p>I am working with a small business in the food industry looking to develop a PET squeeze bottle for one of their products. A critical part of the development process is to iterate over bottle geometries, including bend radii and neck sizes. Using FDM printing, I am able to fabricate test articles quickly, to provide physical prototypes of each bottle shape. This is a low-cost, fast way to determine the "feel" of each bottle, which informs any subsequent design choices. This simple application of 3D printing highlights the capability of the manufacturing technology to quickly produce high quality parts, and the easy turnaround between CAD model and physical specimen. </p>
-<div id="row">
-    <img class="column" src="C1.png" >
-    <img class="column" src="C2.png" >
-</div>
 	
 	<p id="copyright"> Information on this page contains pre-publication data that is copyright of the University of California. Do not reproduce or distribute without consent from the author.</p>
 </div>
