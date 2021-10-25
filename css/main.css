@@ -10,13 +10,13 @@ body {
 }
 header {
     font-size: 1.6em;
-    font-family:'Computer Modern Serif', 'monospace';
+    font-family:'Computer Modern Sans', 'Sans-Serif';
     color: #000;
     font-weight: 400;
     text-transform: uppercase;
 }
 nav ul, footer ul {
-    font-family:'Computer Modern Serif', 'Sans-Serif';
+    font-family:'Computer Modern Sans', 'Sans-Serif';
     padding-bottom: 20px;
     padding-top: 0px;
     padding-left: 0px;
@@ -39,16 +39,16 @@ a:hover {
 
 h1 {
     font-size: 2em;
-    font-family:'Computer Modern Serif', 'Serif';
+    font-family:'Computer Modern Sans', 'Sans-Serif';
 }
 h2 {
-    font-family:'Computer Modern Serif', 'Serif';
+    font-family:'Computer Modern Sans', 'Sans-Serif';
 }
 h3 {
-    font-family:'Computer Modern Serif', 'Serif';
+    font-family:'Computer Modern Sans', 'Sans-Serif';
 }
 h4 {
-    font-family:'Computer Modern Serif', 'Serif';
+    font-family:'Computer Modern Sans', 'Sans-Serif';
     margin-block-start: -1em;
     margin-block-end: 0em;
 }
