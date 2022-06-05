@@ -16,28 +16,29 @@
 
 </head>
 <style>
-    .dropdown {
-  position: relative;
-  display: inline-block;
-}
+    #menu li:hover{
+    color: #f8f8f8;
+    }
 
-.dropdown-content {
-  display: none;
-  position: center;
-  background-color: #ffffff;
-  min-width: 120px;
-  padding: 2px 2px;
-  z-index: 1;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+    #menu ul {
+            position: absolute;
+            padding: 0;
+            left: 0;
+            display: none;
+            /* hides sublists */
+        }
+
+    #menu li:hover ul {
+            display: block;
+        }
+
+        /* shows sublist on hover */
 </style>
 <body>
     <header> Andrew Y. Chen
     </header>
     <nav>
-        <ul>
+        <ul id = "menu">
             <li><a href="/" style="color: #dba504">Home</a></li>
             <li><a href="/about.html">About</a></li>
             <li><a href="/projects.html">Projects</a></li>
