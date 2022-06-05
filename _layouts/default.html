@@ -15,7 +15,24 @@
     </link>
 
 </head>
+<style>
+    .dropdown {
+  position: relative;
+  display: inline-block;
+}
 
+.dropdown-content {
+  display: none;
+  position: center;
+  background-color: #ffffff;
+  min-width: 120px;
+  padding: 2px 2px;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
 <body>
     <header> Andrew Y. Chen
     </header>
@@ -24,7 +41,12 @@
             <li><a href="/" style="color: #dba504">Home</a></li>
             <li><a href="/about.html">About</a></li>
             <li><a href="/projects.html">Projects</a></li>
-            <!--  <li><a href="/proj2.html">Projects</a></li> -->
+            <li><div class="dropdown">
+                <span>Projects</span>
+                <div class="dropdown-content">
+                <p>Hello World!</p>
+                </div>
+              </div></li>
             <li><a href="/seb.html">SEB</a></li>
             <li><a href="/music.html">Music</a></li>
             <li><a href="/resume.html">Resume</a></li>
