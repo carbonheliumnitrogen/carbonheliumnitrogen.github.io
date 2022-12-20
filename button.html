@@ -2,15 +2,52 @@
 layout: default
 title: button
 ---
+<style>
+  .center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+  
+.button {
+  background-color: #00a5c4;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #00a5c4;
+}
+
+.button1:hover {
+  background-color: #00a5c4;
+  color: white;
+}  
+  
+</style>
+
 
 <body>
-  
 <audio id="audio1">
   <source src="sample.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
   
-<button onclick="playAudio()" type="button">click me</button>
+<div class="center">
+  <button onclick="playAudio()" class="button button1">click me</button>
+</div>
 
 <script>
 var x = document.getElementById("audio1"); 
