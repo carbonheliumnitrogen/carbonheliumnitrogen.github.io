@@ -33,7 +33,7 @@ title: train
             const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString();
             var head_resp = await fetch(head_url);
             var head_data = await head_resp.json();
-            console.log('hi1')
+            //console.log('hi1')
             var headsign = head_data.data[0].attributes.headsign;
             return headsign;
         }
@@ -46,7 +46,7 @@ title: train
             const remainder = sec % 3600;
             var minutes = Math.floor(remainder/60);
             var seconds = remainder % 60;
-            console.log(seconds);
+            //console.log(seconds);
 
             if (seconds < 0){
                 var minutes = -999;
@@ -57,9 +57,9 @@ title: train
         async function getTrain(api_url) {
           const response = await fetch(api_url);
           const data = await response.json();
-          console.log(data)
-          console.log(data.data[0].attributes.headsign);
-          console.log(data.data.length);
+          //console.log(data)
+          //console.log(data.data[0].attributes.headsign);
+          //console.log(data.data.length);
           
           const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
           const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
