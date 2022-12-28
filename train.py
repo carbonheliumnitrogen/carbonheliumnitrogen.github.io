@@ -1,5 +1,3 @@
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 from pymbta3 import Alerts, Routes, Vehicles, Predictions, Stops, Trips
 at = Alerts(key = "e093857d5f6d4f0faa7f0e471aee13dd")
