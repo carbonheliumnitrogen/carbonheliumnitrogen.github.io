@@ -1,4 +1,6 @@
 import pandas as pd
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 from pymbta3 import Alerts, Routes, Vehicles, Predictions, Stops, Trips
 at = Alerts(key = "e093857d5f6d4f0faa7f0e471aee13dd")
 rt = Routes(key = "e093857d5f6d4f0faa7f0e471aee13dd")
@@ -72,3 +74,6 @@ summary["Current stop"] = summary.apply(lambda row: current_stop(row), axis = 1)
 def test():
     a = str(summary.iloc[1, 2]) + ' train arriving in ' + str(summary.iloc[1, 3]) + ' min ' + str(summary.iloc[1, 4]) + ' sec'
     print(a)
+
+if __name__ == '__main__':
+    test()
