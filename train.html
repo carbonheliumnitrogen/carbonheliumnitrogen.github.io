@@ -1,22 +1,109 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+title: train
+---
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>test</title>
+
 </head>
 
 <body>
+    <h1> Red Line Tracker </h1>
+    <p>Train to <span id = "dest0"></span> <span id = "status0"></span></p>
+    <p>Train to <span id = "dest1"></span> <span id = "status1"></span></p>
+    <p>Train to <span id = "dest2"></span> <span id = "status2"></span></p>
+    <button onclick="getPorterTrain()">Porter (default) </button>
+    <button onclick="getKendallTrain()">Kendall</button>
 
+    <script>
+        console.log('hi');
+
+        //const api_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=54977517';
+
+        //const api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-portr&filter%5Broute%5D=Red&include=stop'; // Porter by default
+        async function getPorterTrain(){
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-portr&filter%5Broute%5D=Red&include=stop';
+            getTrain(api_url);
+        }
+        async function getKendallTrain(){
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-knncl&filter%5Broute%5D=Red&include=stop';
+            getTrain(api_url);
+        }
+        async function getHeadsign(trip) {
+            const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString();
+            var head_resp = await fetch(head_url);
+            var head_data = await head_resp.json();
+            console.log('hi1')
+            var headsign = head_data.data[0].attributes.headsign;
+            return headsign;
+        }
+        async function getStatus(arrivalTime){
+            var now = new Date().toISOString();
+
+            const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
+            const sec = Math.ceil(diff / 1000); //seconds
+            const hours = Math.floor(sec/3600);
+            const remainder = sec % 3600;
+            var minutes = Math.floor(remainder/60);
+            var seconds = remainder % 60;
+            console.log(seconds);
+
+            if (seconds < 0){
+                var minutes = -999;
+            }
+
+            return [minutes, seconds];
+        }
+        async function getTrain(api_url) {
+          const response = await fetch(api_url);
+          const data = await response.json();
+          console.log(data)
+          console.log(data.data[0].attributes.headsign);
+          console.log(data.data.length);
+          
+          const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
+          const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
+          const date2 = new Date(data.data[2].attributes.arrival_time).toISOString();
+          
+          document.getElementById('dest0').textContent = await getHeadsign(data.data[0].relationships.trip.data.id);
+          const diff0 = await getStatus(date0);
+          const diff0m = diff0[0];
+          const diff0s = diff0[1];
+          if (diff0[0] == -999){
+            document.getElementById('status0').textContent = 'is now boarding';
+          }
+          else {
+            document.getElementById('status0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
+          }
+
+          document.getElementById('dest1').textContent = await getHeadsign(data.data[1].relationships.trip.data.id);
+          const diff1 = await getStatus(date1);
+          const diff1m = diff1[0];
+          const diff1s = diff1[1];
+          if (diff0[1] == -999){
+            document.getElementById('status1').textContent = 'is now boarding';
+          }
+          else {
+            document.getElementById('status1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
+          }
+
+          document.getElementById('dest2').textContent = await getHeadsign(data.data[2].relationships.trip.data.id);
+          const diff2 = await getStatus(date2);
+          const diff2m = diff2[0];
+          const diff2s = diff2[1];
+          if (diff0[2] == -999){
+            document.getElementById('status2').textContent = 'is now boarding';
+          }
+          else {
+            document.getElementById('status2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
+          }
+
+        }
+
+        
+        getTrain('https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-portr&filter%5Broute%5D=Red&include=stop');
+      </script>
 </body>
 
-<script>
-  const api_url = 'url here'
-  async function getTrain() {
-    const response = await fetch(api_url);
-    const data = await response.json();
-    console.log(data)
-  }
-</script>
-</html>
+
+
