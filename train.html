@@ -5,21 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>test</title>
-   <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-  </head>
-  <body>
-    <py-env>
-        - pandas 
-        - datetime
-        - warnings
-        - micropip
-      </py-env> 
-  <div id="output"></div>
-  <py-script src="./train.py">
-    async def main():
-        await micropip.install(["pymbta3"], keep_going = True)
-  </py-script>
-  </body>
+</head>
 
+<body>
+
+</body>
+
+<script>
+  const api_url = 'url here'
+  async function getTrain() {
+    const response = await fetch(api_url);
+    const data = await response.json();
+    console.log(data)
+  }
+</script>
 </html>
