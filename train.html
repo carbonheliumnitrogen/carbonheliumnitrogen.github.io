@@ -12,11 +12,13 @@
     <py-env>
         - pandas 
         - datetime
-        - pymbta3
         - warnings
       </py-env> 
   <div id="output"></div>
-  <py-script src="./train.py"></py-script>
+  <py-script src="./train.py">
+    async def main():
+        await micropip.install(["pymbta3"])
+  </py-script>
   </body>
 
 </html>
