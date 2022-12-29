@@ -5,102 +5,235 @@ title: train
 
 <head>
 
-</head>
-
-<body>
-  <h1> Red Line Tracker </h1>
-  <p>Train to <span id = "dest0"></span> <span id = "status0"></span></p>
-  <p>Train to <span id = "dest1"></span> <span id = "status1"></span></p>
-  <p>Train to <span id = "dest2"></span> <span id = "status2"></span></p>
-  <button onclick="getPorterTrain()">Porter (default) </button>
-  <button onclick="getKendallTrain()">Kendall</button>
-
-  <script>
-      //console.log('hi');
-
-      //const api_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=54977517';
-
-      //const api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-portr&filter%5Broute%5D=Red&include=stop'; // Porter by default
-      async function getPorterTrain(){
-          var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-portr&filter%5Broute%5D=Red&include=stop&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd';
-          getTrain(api_url);
-      }
-      async function getKendallTrain(){
-          var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-knncl&filter%5Broute%5D=Red&include=stop&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd';
-          getTrain(api_url);
-      }
-      async function getHeadsign(trip) {
-          const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd';
-          var head_resp = await fetch(head_url);
-          var head_data = await head_resp.json();
-          //console.log('hi1')
-          var headsign = head_data.data[0].attributes.headsign;
-          return headsign;
-      }
-      async function getStatus(arrivalTime){
-          var now = new Date().toISOString();
-
-          const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
-          const sec = Math.ceil(diff / 1000); //seconds
-          const hours = Math.floor(sec/3600);
-          const remainder = sec % 3600;
-          var minutes = Math.floor(remainder/60);
-          var seconds = remainder % 60;
-          //console.log(seconds);
-
-          if (seconds < 0){
-              var minutes = -999;
-          }
-
-          return [minutes, seconds];
-      }
-      async function getTrain(api_url) {
-        const response = await fetch(api_url);
-        const data = await response.json();
-        //console.log(data)
-        //console.log(data.data[0].attributes.headsign);
-        //console.log(data.data.length);
-        
-        const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
-        const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
-        const date2 = new Date(data.data[2].attributes.arrival_time).toISOString();
-        
-        document.getElementById('dest0').textContent = await getHeadsign(data.data[0].relationships.trip.data.id);
-        const diff0 = await getStatus(date0);
-        const diff0m = diff0[0];
-        const diff0s = diff0[1];
-        if (diff0[0] == -999){
-          document.getElementById('status0').textContent = 'is now boarding';
-        }
-        else {
-          document.getElementById('status0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
-        }
-
-        document.getElementById('dest1').textContent = await getHeadsign(data.data[1].relationships.trip.data.id);
-        const diff1 = await getStatus(date1);
-        const diff1m = diff1[0];
-        const diff1s = diff1[1];
-        if (diff0[1] == -999){
-          document.getElementById('status1').textContent = 'is now boarding';
-        }
-        else {
-          document.getElementById('status1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
-        }
-
-        document.getElementById('dest2').textContent = await getHeadsign(data.data[2].relationships.trip.data.id);
-        const diff2 = await getStatus(date2);
-        const diff2m = diff2[0];
-        const diff2s = diff2[1];
-        if (diff0[2] == -999){
-          document.getElementById('status2').textContent = 'is now boarding';
-        }
-        else {
-          document.getElementById('status2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
-        }
-
-      }
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <style>
+      * {
+    box-sizing: border-box;
+  }
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 50px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .button {
+    background-color: #da291c;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #da291c;
+  }
+  
+  .button1:hover {
+    background-color: #da291c;
+    color: white;
+  }  
+  </style>
+  </head>
+  
+  <body>
+      <h1> Red Line Tracker </h1>
+      <div class = "row">
+          <div class = "column" style="background-color:#bbb;">
+              Northbound
+              <p>Train to <span id = "ndest0"></span> <span id = "nstatus0"></span></p>
+              <p>Train to <span id = "ndest1"></span> <span id = "nstatus1"></span></p>
+              <p>Train to <span id = "ndest2"></span> <span id = "nstatus2"></span></p>
+          </div>
+          <div class = "column" style="background-color:#bbb;">
+              Southbound
+              <p>Train to <span id = "sdest0"></span> <span id = "sstatus0"></span></p>
+              <p>Train to <span id = "sdest1"></span> <span id = "sstatus1"></span></p>
+              <p>Train to <span id = "sdest2"></span> <span id = "sstatus2"></span></p>
+          </div>
+      </div>
       
-      getTrain('https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-portr&filter%5Broute%5D=Red&include=stop&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd');
-    </script>
-</body>
+      <button class="button button1" onclick="getPorterTrain()">Porter (default) </button>
+      <button class="button button1" onclick="getHarvardTrain()">Harvard</button>
+      <button class="button button1" onclick="getCentralTrain()">Central</button>
+      <button class="button button1" onclick="getKendallTrain()">Kendall</button>
+      <button class="button button1" onclick="getCharlesTrain()">Charles/MGH</button>
+      <button class="button button1" onclick="getParkStTrain()">Park Street</button>
+      <button class="button button1" onclick="getDTXTrain()">Downtown Crossing</button>
+      <script>
+  
+          async function getPorterTrain(){
+              var station_code = 'portr';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+          async function getHarvardTrain(){
+              var station_code = 'harsq';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+          async function getCentralTrain(){
+              var station_code = 'cntsq';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }    
+          async function getKendallTrain(){
+              var station_code = 'knncl';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+          async function getCharlesTrain(){
+              var station_code = 'chmnl';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+          async function getParkStTrain(){
+              var station_code = 'pktrm';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+          async function getDTXTrain(){
+              var station_code = 'dwnxg';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+  
+          async function getHeadsign(trip) {
+              const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd';
+              var head_resp = await fetch(head_url);
+              var head_data = await head_resp.json();
+              //console.log('hi1')
+              var headsign = head_data.data[0].attributes.headsign;
+              return headsign;
+          }
+          async function getStatus(arrivalTime){
+              var now = new Date().toISOString();
+  
+              const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
+              const sec = Math.ceil(diff / 1000); //seconds
+              const hours = Math.floor(sec/3600);
+              const remainder = sec % 3600;
+              var minutes = Math.floor(remainder/60);
+              var seconds = remainder % 60;
+              //console.log(seconds);
+  
+              if (seconds < 0){
+                  var minutes = -999;
+              }
+  
+              return [minutes, seconds];
+          }
+          async function getSouthboundTrain(station_code) {
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd'
+            const response = await fetch(api_url);
+            const data = await response.json();
+            //console.log(data)
+            //console.log(data.data[0].attributes.headsign);
+            //console.log(data.data.length);
+            
+            const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
+            const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
+            const date2 = new Date(data.data[2].attributes.arrival_time).toISOString();
+            
+            document.getElementById('sdest0').textContent = await getHeadsign(data.data[0].relationships.trip.data.id);
+            const diff0 = await getStatus(date0);
+            const diff0m = diff0[0];
+            const diff0s = diff0[1];
+            if (diff0[0] == -999){
+              document.getElementById('sstatus0').textContent = 'is now boarding';
+            }
+            else {
+              document.getElementById('sstatus0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
+            }
+  
+            document.getElementById('sdest1').textContent = await getHeadsign(data.data[1].relationships.trip.data.id);
+            const diff1 = await getStatus(date1);
+            const diff1m = diff1[0];
+            const diff1s = diff1[1];
+            if (diff1[0] == -999){
+              document.getElementById('sstatus1').textContent = 'is now boarding';
+            }
+            else {
+              document.getElementById('sstatus1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
+            }
+  
+            document.getElementById('sdest2').textContent = await getHeadsign(data.data[2].relationships.trip.data.id);
+            const diff2 = await getStatus(date2);
+            const diff2m = diff2[0];
+            const diff2s = diff2[1];
+            if (diff2[0] == -999){
+              document.getElementById('sstatus2').textContent = 'is now boarding';
+            }
+            else {
+              document.getElementById('sstatus2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
+            }
+  
+          }
+          async function getNorthboundTrain(station_code) {
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=1&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd'
+            const response = await fetch(api_url);
+            const data = await response.json();
+            //console.log(data)
+            //console.log(data.data[0].attributes.headsign);
+            //console.log(data.data.length);
+            
+            const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
+            const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
+            const date2 = new Date(data.data[2].attributes.arrival_time).toISOString();
+            
+            document.getElementById('ndest0').textContent = await getHeadsign(data.data[0].relationships.trip.data.id);
+            const diff0 = await getStatus(date0);
+            const diff0m = diff0[0];
+            const diff0s = diff0[1];
+            if (diff0[0] == -999){
+              document.getElementById('nstatus0').textContent = 'is now boarding';
+            }
+            else {
+              document.getElementById('nstatus0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
+            }
+  
+            document.getElementById('ndest1').textContent = await getHeadsign(data.data[1].relationships.trip.data.id);
+            const diff1 = await getStatus(date1);
+            const diff1m = diff1[0];
+            const diff1s = diff1[1];
+            if (diff1[0] == -999){
+              document.getElementById('nstatus1').textContent = 'is now boarding';
+            }
+            else {
+              document.getElementById('nstatus1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
+            }
+  
+            document.getElementById('ndest2').textContent = await getHeadsign(data.data[2].relationships.trip.data.id);
+            const diff2 = await getStatus(date2);
+            const diff2m = diff2[0];
+            const diff2s = diff2[1];
+            if (diff2[0] == -999){
+              document.getElementById('nstatus2').textContent = 'is now boarding';
+            }
+            else {
+              document.getElementById('nstatus2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
+            }
+  
+          }
+  
+          
+          getSouthboundTrain('portr');
+          getNorthboundTrain('portr');
+        </script>
+  </body>
+  
