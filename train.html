@@ -185,6 +185,9 @@ title: train
             if (diff0[0] == -999){
               document.getElementById('sstatus0').textContent = 'is now boarding';
             }
+            else if (diff0[0] >= 20){
+              document.getElementById('sstatus0').textContent = 'arrives in 20+ minutes';
+            }
             else {
               document.getElementById('sstatus0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
             }
@@ -196,6 +199,9 @@ title: train
             if (diff1[0] == -999){
               document.getElementById('sstatus1').textContent = 'is now boarding';
             }
+            else if (diff1[0] >= 20){
+              document.getElementById('sstatus1').textContent = 'arrives in 20+ minutes';
+            }
             else {
               document.getElementById('sstatus1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
             }
@@ -206,6 +212,9 @@ title: train
             const diff2s = diff2[1];
             if (diff2[0] == -999){
               document.getElementById('sstatus2').textContent = 'is now boarding';
+            }
+            else if (diff2[0] >= 20){
+              document.getElementById('sstatus2').textContent = 'arrives in 20+ minutes';
             }
             else {
               document.getElementById('sstatus2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
