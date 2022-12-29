@@ -79,6 +79,8 @@ title: train
       <button class="button button1 btn-to-click" id = "test6" onclick="getCharlesTrain()">Charles/MGH</button>
       <button class="button button1 btn-to-click" id = "test7" onclick="getParkStTrain()">Park Street</button>
       <button class="button button1 btn-to-click" id = "test8" onclick="getDTXTrain()">Downtown Crossing</button>
+      <button class="button button1 btn-to-click" id = "test8" onclick="getSouthStationTrain()">South Station</button>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
       <script>
             $(function() {
@@ -140,7 +142,11 @@ title: train
               getSouthboundTrain(station_code);
               getNorthboundTrain(station_code);
           }
-  
+          async function getSouthStationTrain(){
+              var station_code = 'sstat';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
           async function getHeadsign(trip) {
               const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd';
               var head_resp = await fetch(head_url);
