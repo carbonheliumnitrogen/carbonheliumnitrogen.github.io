@@ -33,6 +33,10 @@ a {
     text-decoration: none;
     color: #0469db;
 }
+ab {
+    text-decoration: none;
+    color: #da291c;
+}
 a:hover {
     text-decoration: underline;
 }
