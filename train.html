@@ -68,6 +68,8 @@ title: train
           </div>
       </div>
       
+      <!--<button class="button button1" onclick="getAlewifeTrain()">Alewife</button>-->
+      <button class="button button1" onclick="getDavisTrain()">Davis</button>
       <button class="button button1" onclick="getPorterTrain()">Porter (default) </button>
       <button class="button button1" onclick="getHarvardTrain()">Harvard</button>
       <button class="button button1" onclick="getCentralTrain()">Central</button>
@@ -77,6 +79,16 @@ title: train
       <button class="button button1" onclick="getDTXTrain()">Downtown Crossing</button>
       <script>
   
+          async function getAlewifeTrain(){
+              var station_code = 'alfcl';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
+          async function getDavisTrain(){
+              var station_code = 'davis';
+              getSouthboundTrain(station_code);
+              getNorthboundTrain(station_code);
+          }
           async function getPorterTrain(){
               var station_code = 'portr';
               getSouthboundTrain(station_code);
