@@ -70,16 +70,30 @@ title: train
       </div>
       <br>
       <!--<button class="button button1" onclick="getAlewifeTrain()">Alewife</button>-->
-      <button class="button button1" onclick="getDavisTrain()">Davis</button>
-      <button class="button button1" onclick="getPorterTrain()">Porter (default) </button>
-      <button class="button button1" onclick="getHarvardTrain()">Harvard</button>
-      <button class="button button1" onclick="getCentralTrain()">Central</button>
-      <button class="button button1" onclick="getKendallTrain()">Kendall</button>
-      <button class="button button1" onclick="getCharlesTrain()">Charles/MGH</button>
-      <button class="button button1" onclick="getParkStTrain()">Park Street</button>
-      <button class="button button1" onclick="getDTXTrain()">Downtown Crossing</button>
+      <button class="button button1 btn-to-click" id = "test1" onclick="getDavisTrain()">Davis</button>
+      <button class="button button1 btn-to-click" id = "test2" onclick="getPorterTrain()">Porter (default) </button>
+      <button class="button button1 btn-to-click" id = "test3" onclick="getHarvardTrain()">Harvard</button>
+      <button class="button button1 btn-to-click" id = "test4" onclick="getCentralTrain()">Central</button>
+      <button class="button button1 btn-to-click" id = "test5" onclick="getKendallTrain()">Kendall</button>
+      <button class="button button1 btn-to-click" id = "test6" onclick="getCharlesTrain()">Charles/MGH</button>
+      <button class="button button1 btn-to-click" id = "test7" onclick="getParkStTrain()">Park Street</button>
+      <button class="button button1 btn-to-click" id = "test8" onclick="getDTXTrain()">Downtown Crossing</button>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
       <script>
-  
+            $(function() {
+              let theTimeout;
+              let clickNo = 0;
+              console.log("Btn function");
+              $(".btn-to-click").on("click", function() {
+                clickNo++;
+                let btnElement = this.getAttribute("id");
+                clearTimeout(theTimeout);
+                theTimeout = setTimeout(() => {
+                  $(`#${btnElement}`).trigger("click");
+                }, 1000);
+              });
+            });
+
           async function getAlewifeTrain(){
               var station_code = 'alfcl';
               getSouthboundTrain(station_code);
