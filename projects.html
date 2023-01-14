@@ -68,47 +68,110 @@ title: Projects
         <br> <br>
     </p>
 
-    <h3>Effect of Build Parameters on the Mechanical Behavior of Polymeric Materials Produced by Multi-Jet Fusion</h3>
+    <h3>Multi Jet Fusion Printed Lattice Materials: Characterization and Prediction of Mechanical Performance</h3>
     <h4>HP Labs, Palo Alto, CA</h4>
-    <p>Multi-jet fusion is a fascinating new form of powder-bed fusion printing. Instead of relying on a laser or other
-        directed light source, liquid-state “printing agents” are dropped onto the powder bed using traditional inkjet
-        nozzles much like those seen on 2D-printers. In particular, a carbon black-based fusing agent is jetted onto
-        regions of the bed where solidification is desired, and a different detailing agent is dropped to inhibit fusing
-        in other areas. When an overhead infrared lamp is then passed over the entire print bed, energy is absorbed by
-        the fusing agent, building a layer of the printed part. The MJF process has incredible potential for directly
-        fabricating large-scale polymer parts – there is no support material, and the only post-processing required
-        involves cleaning unused powder from the surface of the finished part.</p>
-    <p> This project attempts a characterization effort that has never been seen in the present literature. It is known
-        that varying the nesting parameters (e.g. print angle, print location) and physical parameters (e.g. part size,
-        inter-part spacing) has an impact on the mechanical properties of the printed parts. However, these effects,
-        which are due to complex interactions between the printing agents, applied power, and polymer material, are only
-        “benchmarked” at a high level. To perform a thorough characterization of the print process across two materials
-        (polyamide 11 and polyamide 12), we print a total of 1,485 specimens over nine printing buckets, varying the
-        printing angle, nominal dimensions, and three-dimensional center location. We then test the specimens in
-        tension, three-point bending, or impact, and use the results to characterize tensile and flexural strength and
-        stiffness, elongation at break, and fracture energy as a function of our input parameters. To produce
-        quantitative correlations in the data, we apply a normalization algorithm to isolate specimen data as a function
-        of a particular variable, allowing us to uncover the trends we seek.</p>
-    <p> <a href="https://doi.org/10.1002/adem.202100974"> Read the paper here! </a> </p>
+    <p>Now that we've <a href="#hp1">characterized monolithic specimens</a> of MJF-printed nylon, the next step was to
+        understand how to harness the potential for large-scale structures with highly-tunable material properties.
+        In particular, the MJF process is especially well suited for printing lattices of almost any topology, owing to
+        the lack of support material required during printing. The goal of this project was to characterize the
+        stiffness
+        and strength scaling behavior of MJF-printed polyamide (PA)-12, as well as investigate particular trends in
+        lattice material properties due to packing parameters like printing orientation or location within the build
+        volume.
+        To accomplish this, we print and test several distinct lattice geometries to uncover the stretching, bending,
+        and
+        buckling behavior of printed structures over a wide range of relative densities. For the first time, we present
+        the scaling behavior of MJF-printed PA-12 and contextualize this behavior alongisde other, previously-studied
+        printing systems. We also control for print orientation and build location to understand the influence of
+        print-chamber cooling on material properties. Our findings have immediate applications for large-scale printed
+        structures and assemblies - like printed rocket airframes - that must be lightweight, stiff, and strong.</p>
+
+    <!-- <p> <a href="https://doi.org/10.1002/adem.202100974"> Read the full story </a> </p> -->
     <div id="row">
         <figure>
-            <img class="columntwo" src="images/6-a.png" style="width:70%">
-            <figcaption> Representative cross-section images of fractured printed specimens (tension, top row; impact,
-                bottom row).
+            <img class="columntwo" src="images/7-1.png" style="width:70%">
+            <figcaption> Overview of the experimental parameters. To study the mechanical behavior of specimens over
+                a wide range of relative densities, the beam thickness and unit cell density are varied for each of
+                the three unit cell geometries - octet, simple-cubic, and Kelvin (tetrakaidecahedron).
             </figcaption>
         </figure>
         <figure>
-            <img class="columntwo" src="images/Poster_Fig_2.png" style="width:70%">
-            <figcaption> Angle-based normalized material properties for polyamide (PA)-12, demonstrating the trends
-                obtained from the printed specimens.
+            <img class="columntwo" src="images/7-2.png" style="width:70%">
+            <figcaption> (a) Relative stiffness and (b) strength as a function of relative density. Best-fit exponents,
+                expressed here as the slope of the plot on logarithmic axes, represent the structural efficiency of each
+                geometry.
+                At a relative density threshold of 10%, the contribution of the nodes to stiffness and strength
+                alter the scaling behavior.
             </figcaption>
         </figure>
         <figure>
-            <img class="columntwo" src="images/1c.png" style="width:70%">
-            <figcaption class="bottom-three"> Nominal thickness-based material properties for PA-12 and PA-11. Across
-                both materials, the ultimate tensile strength, elastic modulus, and elongation at break increase with
-                increasing nominal thickness. </figcaption>
+            <img class="columntwo" src="images/7-3.png" style="width:70%">
+            <figcaption class="bottom-three"> Normalized angle-based stiffness trends.
+                The printing angle, measured from the vertical, determines
+                the amount of “stair-stepping” due to the layer-based fusion process.
+                Results are grouped based on slenderness; slender lattices have a relative density less than 10%.
+            </figcaption>
         </figure>
+    </div>
+
+    <div id="hp1">
+        <h3>Effect of Build Parameters on the Mechanical Behavior of Polymeric Materials Produced by Multi-Jet Fusion
+        </h3>
+        <h4>HP Labs, Palo Alto, CA</h4>
+        <p>Multi-jet fusion is a fascinating new form of powder-bed fusion printing. Instead of relying on a laser or
+            other
+            directed light source, liquid-state “printing agents” are dropped onto the powder bed using traditional
+            inkjet
+            nozzles much like those seen on 2D-printers. In particular, a carbon black-based fusing agent is jetted onto
+            regions of the bed where solidification is desired, and a different detailing agent is dropped to inhibit
+            fusing
+            in other areas. When an overhead infrared lamp is then passed over the entire print bed, energy is absorbed
+            by
+            the fusing agent, building a layer of the printed part. The MJF process has incredible potential for
+            directly
+            fabricating large-scale polymer parts – there is no support material, and the only post-processing required
+            involves cleaning unused powder from the surface of the finished part.</p>
+        <p> This project attempts a characterization effort that has never been seen in the present literature. It is
+            known
+            that varying the nesting parameters (e.g. print angle, print location) and physical parameters (e.g. part
+            size,
+            inter-part spacing) has an impact on the mechanical properties of the printed parts. However, these effects,
+            which are due to complex interactions between the printing agents, applied power, and polymer material, are
+            only
+            “benchmarked” at a high level. To perform a thorough characterization of the print process across two
+            materials
+            (polyamide 11 and polyamide 12), we print a total of 1,485 specimens over nine printing buckets, varying the
+            printing angle, nominal dimensions, and three-dimensional center location. We then test the specimens in
+            tension, three-point bending, or impact, and use the results to characterize tensile and flexural strength
+            and
+            stiffness, elongation at break, and fracture energy as a function of our input parameters. To produce
+            quantitative correlations in the data, we apply a normalization algorithm to isolate specimen data as a
+            function
+            of a particular variable, allowing us to uncover the trends we seek.</p>
+        <p> <a href="https://doi.org/10.1002/adem.202100974"> Read the full story </a> </p>
+        <div id="row">
+            <figure>
+                <img class="columntwo" src="images/6-a.png" style="width:70%">
+                <figcaption> Representative cross-section images of fractured printed specimens (tension, top row;
+                    impact,
+                    bottom row).
+                </figcaption>
+            </figure>
+            <figure>
+                <img class="columntwo" src="images/Poster_Fig_2.png" style="width:70%">
+                <figcaption> Angle-based normalized material properties for polyamide (PA)-12, demonstrating the trends
+                    obtained from the printed specimens.
+                </figcaption>
+            </figure>
+            <figure>
+                <img class="columntwo" src="images/1c.png" style="width:70%">
+                <figcaption class="bottom-three"> Nominal thickness-based material properties for PA-12 and PA-11.
+                    Across
+                    both materials, the ultimate tensile strength, elastic modulus, and elongation at break increase
+                    with
+                    increasing nominal thickness. </figcaption>
+            </figure>
+        </div>
     </div>
 
     <h3>CFRP Composites: A Comparison of Manufacturing Methods on Mechanical Properties</h3>
@@ -133,7 +196,7 @@ title: Projects
         using ANSYS, and the physical specimens undergo mechanical testing following ASTM standards. The results of this
         study will hopefully provide a fair point of comparision between the two methods as well as perspective on the
         viability of new AM technology for industrial applications.</p>
-    <p> <a href="https://doi.org/10.1016/j.ijlmm.2021.04.001"> Read the paper here! </a> </p>
+    <p> <a href="https://doi.org/10.1016/j.ijlmm.2021.04.001"> Read the full story </a> </p>
 
     <div id="row">
         <figure>
@@ -178,38 +241,49 @@ title: Projects
         </figure>
         <figure>
             <img class="columntwo" src="images/A2_1.png">
-            <figcaption class="bottom-three"> Demonstration of the printed composite's ability to pass current to power an LED. </figcaption>
+            <figcaption class="bottom-three"> Demonstration of the printed composite's ability to pass current to power
+                an LED. </figcaption>
         </figure>
     </div>
 
 
     <h3>Publications</h3>
     <h4>Journal Articles</h4>
-    <p> Chen, A. Y., Chen, A., Wright, J., Fitzhugh, A., Hartman, A., Zeng, J., & Gu, G. X. (2021). <em> Effect of build parameters of the mechanical behavior of polymeric materials produced by multi-jet fusion. </em>
-        Advanced Engineering Materials, <em> in press. </em>  <a
+
+    <p> Chen, A. Y., Chen, A., Fitzhugh, A., Hartman, A., Kaiser, P., Nwaogwugwu, I., Zeng, J., & Gu, G. X. (2023).
+        <em>Multi Jet Fusion printed lattice materials: Characterization and prediction of mechanical performance.</em>
+        Materials Advances. <em> Accepted, in press. </em>
+    </p>
+    <p> Chen, A. Y., Chen, A., Wright, J., Fitzhugh, A., Hartman, A., Zeng, J., & Gu, G. X. (2022). <em>Effect of Build
+            Parameters on the Mechanical Behavior of Polymeric Materials Produced by Multijet Fusion. </em>
+        Advanced Engineering Materials, 24(9), 2100974. <a
             href="https://doi.org/10.1002/adem.202100974">https://doi.org/10.1002/adem.202100974</a> </p>
     <p> Chen, A. Y., Pegg, E., Chen, A., Jin, Z., & Gu, G. X. (2021). <em>4D-printing of electro-active materials.</em>
-        Advanced Intelligent Systems, 2100019. <a
+        Advanced Intelligent Systems, 3(12), 2100019. <a
             href="https://doi.org/10.1002/aisy.202100019">https://doi.org/10.1002/aisy.202100019</a> </p>
     <p> Chen, A. Y., Baehr, S., Turner, A., Zhang, Z., & Gu, G. X. (2021). <em> Carbon-fiber reinforced polymer
             composites: A comparison of manufacturing methods on mechanical properties. </em> International Journal of
-                Lightweight Materials and Manufacture, 4(4), 468–479. <a
-                    href="https://doi.org/10.1016/j.ijlmm.2021.04.001">https://doi.org/10.1016/j.ijlmm.2021.04.001</a>
+        Lightweight Materials and Manufacture, 4(4), 468–479. <a
+            href="https://doi.org/10.1016/j.ijlmm.2021.04.001">https://doi.org/10.1016/j.ijlmm.2021.04.001</a>
     </p>
     <p> Guardincerri, E., Bacon, J. D., Barros, N., Blasi, C., Bonechi, L., Chen, A. Y., D’Alessandro, R., Durham, J.
         M., Fine, M., Mauger, C., Mayers, G., Morris, C., Newcomer, F. M., Okasinski, J., Pizzico, T., Plaud-Ramos, K.,
         Poulson, D. C., Reilly, M. B., Roberts, A., Saeid, T., Vaccaro, V. & Van Berg, R. (2018). <em> Imaging the dome
             of Santa Maria del Fiore using cosmic rays. </em> Philosophical Transactions of the Royal Society A:
-                Mathematical, Physical and Engineering Sciences, 377(2137), 20180136. <a
-                    href="https://doi.org/10.1098/rsta.2018.0136">https://doi.org/10.1098/rsta.2018.0136</a> </p>
+        Mathematical, Physical and Engineering Sciences, 377(2137), 20180136. <a
+            href="https://doi.org/10.1098/rsta.2018.0136">https://doi.org/10.1098/rsta.2018.0136</a> </p>
     <br>
     <br>
     <h4>Conference Presentations</h4>
-    <p>Chen, A. Y., Chen, A., Wright, J., Fitzhugh, A., Hartman, A., Zeng, J., & Gu, G. X. (2021). <em> Effect of build
-            parameters on the material properties of printed parts produced by multi-jet fusion. </em> 2021 Solid
-                Freeform Fabrication Symposium, Austin, TX. </p>
+    <p>
+        Chen, A. Y., Chen, A., Wright, J., Fitzhugh, A., Hartman, A., Zeng, J., & Gu, G. X. (2022). <em>Multi-jet fusion
+            printed lattice materials: characterization and prediction of mechanical performance.</em> 2022 MRS Spring
+        Meeting and Exhibit, Honolulu, HI. </p>
+    <p>Chen, A. Y., Chen, A., Wright, J., Fitzhugh, A., Hartman, A., Zeng, J., & Gu, G. X. (2021). <em>Effect of build
+            parameters on the material properties of printed parts produced by multi-jet fusion.</em> 2021 Solid
+        Freeform Fabrication Symposium, Austin, TX. </p>
     <br>
     <br>
     <p id="copyright"> Information on this page contains pre-publication data that is copyright of the University of
-        California. Reproduction or distribution is prohibuited without consent from the author.</p>
+        California. Reproduction or distribution is prohibited without consent from the author.</p>
 </div>
