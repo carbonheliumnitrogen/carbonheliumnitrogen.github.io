@@ -200,7 +200,7 @@ title: train
             return [minutes, seconds];
         }
         async function getOutboundBus(stop_code) {
-            document.getElementById('label2').textContent = "Outbound from 84 Mass Ave"
+            document.getElementById('label2').textContent = "Outbound from 77 Mass Ave"
             const url = 'https://api-v3.mbta.com/predictions';
             const params = new URLSearchParams({
                 'filter[stop]': stop_code.toString(), // Replace with the correct stop ID
