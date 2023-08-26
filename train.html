@@ -72,7 +72,7 @@ title: train
             color: black;
         }
 
-        .busDisclaimer{ 
+        .busDisc { 
             font-family: 'Computer Modern Sans', 'Sans-Serif';
             display: none; 
         }​
@@ -83,7 +83,7 @@ title: train
     <h1> Red Line Tracker </h1>
     <p>Information comes directly from the <a href="https://www.mbta.com/developers/v3-api">MBTA API</a>. Please also listen for station announcements - as we know, train status is subject to change at any time.</p>
     <br>
-    <div id="busDisclaimer">
+    <div id="busDisclaimer" class="busDisc">
         <em>Disclaimer for bus predictions: </em> The MBTA bus predictions are subject to a high degree of variability and buses may leave up to 30 seconds ahead of schedule. Note when the next scheduled arrival is and have an alternative in mind. (This is known, unfortunately, due to personal experience.)
     </div>
     <br>
@@ -197,6 +197,7 @@ title: train
             var now = new Date().toISOString();
             
             const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
+            console.log(diff);
             const sec = Math.ceil(diff / 1000); //seconds
             const hours = Math.floor(sec / 3600);
             const remainder = sec % 3600;
