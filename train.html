@@ -86,7 +86,6 @@ title: train
 <body>
     <h1> Red Line Tracker </h1>
     <p>Information comes directly from the <a href="https://www.mbta.com/developers/v3-api">MBTA API</a>. Please also listen for station announcements - as we know, train status is subject to change at any time.</p>
-    <br>
     <div id="busDisclaimer" class="busDisc">
         <em>Disclaimer for bus predictions: </em> The MBTA bus predictions are subject to a high degree of variability and buses may leave up to 30 seconds ahead of schedule. Note when the next scheduled arrival is and have an alternative in mind. (This is known, unfortunately, due to personal experience.)
     </div>
@@ -137,46 +136,64 @@ title: train
             var station_code = 'alfcl';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getDavisTrain() {
             var station_code = 'davis';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getPorterTrain() {
             var station_code = 'portr';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getHarvardTrain() {
             var station_code = 'harsq';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getCentralTrain() {
             var station_code = 'cntsq';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getKendallTrain() {
             var station_code = 'knncl';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getCharlesTrain() {
             var station_code = 'chmnl';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getParkStTrain() {
             var station_code = 'pktrm';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getDTXTrain() {
             var station_code = 'dwnxg';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getSouthStationTrain() {
             var station_code = 'sstat';
@@ -203,8 +220,8 @@ title: train
             var now = new Date().toISOString();
             
             const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
-            console.log(now);
-            console.log(arrivalTime);
+            //console.log(now);
+            //console.log(arrivalTime);
             const sec = Math.ceil(diff / 1000); //seconds
             const hours = Math.floor(sec / 3600);
             const remainder = sec % 3600;
@@ -214,7 +231,7 @@ title: train
             if (seconds < 0) {
                 var minutes = -999;
             }
-            console.log(minutes);
+            //console.log(minutes);
             return [minutes, seconds];
         }
         async function getOutboundBus(stop_code) {
