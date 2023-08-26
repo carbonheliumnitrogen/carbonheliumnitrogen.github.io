@@ -78,6 +78,10 @@ title: train
     <h1> Red Line Tracker </h1>
     <p>Information comes directly from the <a href="https://www.mbta.com/developers/v3-api">MBTA API</a>. Please also listen for station announcements - as we know, train status is subject to change at any time.</p>
     <br>
+    <div id="busDisclaimer">
+        <em>Disclaimer for bus predictions: </em> The MBTA bus predictions are subject to a high degree of variability and buses may leave up to 30 seconds ahead of schedule. Note when the next scheduled arrival is and have an alternative in mind. (This is known, unfortunately, due to personal experience.)
+    </div>
+    <br>
     <div class="row">
         <div class="column" style="background-color:#bbb;">
             <p><b><span id="label1"></span></b></p>
@@ -174,6 +178,8 @@ title: train
         async function getRte1() {
             getInboundBus(110); //Mass Ave@Holyoke St, see https://api-v3.mbta.com/stops
             getOutboundBus(97); //77 Mass Ave
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "block";
         }
 
         async function getHeadsign(trip) {
