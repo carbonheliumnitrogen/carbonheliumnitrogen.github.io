@@ -369,7 +369,7 @@ title: train
             var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd'
             const response = await fetch(api_url);
             const data = await response.json();
-            //console.log(data)
+            console.log(data)
 
             try {
                 const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
