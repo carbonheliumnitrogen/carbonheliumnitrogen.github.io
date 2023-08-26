@@ -119,7 +119,6 @@ title: train
         $(function () {
             let theTimeout;
             let clickNo = 0;
-            console.log("Btn function");
             $(".btn-to-click").on("click", function () {
                 clickNo++;
                 let btnElement = this.getAttribute("id");
@@ -207,7 +206,7 @@ title: train
             if (seconds < 0) {
                 var minutes = -999;
             }
-
+            console.log(minutes);
             return [minutes, seconds];
         }
         async function getOutboundBus(stop_code) {
