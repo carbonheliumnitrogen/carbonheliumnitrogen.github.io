@@ -204,6 +204,7 @@ title: train
             
             const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
             console.log(now);
+            console.log(arrivalTime);
             const sec = Math.ceil(diff / 1000); //seconds
             const hours = Math.floor(sec / 3600);
             const remainder = sec % 3600;
