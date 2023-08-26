@@ -178,6 +178,8 @@ title: train
             var station_code = 'sstat';
             getSouthboundTrain(station_code);
             getNorthboundTrain(station_code);
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "none";
         }
         async function getRte1() {
             getInboundBus(110); //Mass Ave@Holyoke St, see https://api-v3.mbta.com/stops
@@ -197,7 +199,7 @@ title: train
             var now = new Date().toISOString();
             
             const diff = (Date.parse(arrivalTime) - Date.parse(now)); // milliseconds
-            console.log(Date.parse(now));
+            console.log(now);
             const sec = Math.ceil(diff / 1000); //seconds
             const hours = Math.floor(sec / 3600);
             const remainder = sec % 3600;
