@@ -210,7 +210,7 @@ title: train
         }
 
         async function getHeadsign(trip) {
-            const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd';
+            const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key=e093857d5f6d4f0faa7f0e471aee13dd';
             var head_resp = await fetch(head_url);
             var head_data = await head_resp.json();
             var headsign = head_data.data[0].attributes.headsign;
