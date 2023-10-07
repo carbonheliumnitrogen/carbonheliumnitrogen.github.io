@@ -317,7 +317,7 @@ title: train
                 'api_key': 'e093857d5f6d4f0faa7f0e471aee13dd' // Replace with your actual API key
             });
 
-            //var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=' + stop_code.toString() + '&filter%5Broute%5D=1&include=stop&sort=departure_time&filter%5Bdirection_id%5D=0&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd'
+            //var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=' + stop_code.toString() + '&filter%5Broute%5D=1&include=stop&sort=departure_time&filter%5Bdirection_id%5D=0&api_key=e093857d5f6d4f0faa7f0e471aee13dd'
             const response = await fetch(`${url}?${params}`);
             const rawdata = await response.json();
             //Some of the bus predictions are not associated with a departure time
@@ -383,7 +383,7 @@ title: train
         async function getSouthboundTrain(station_code) {
             document.getElementById('label2').textContent = "Southbound Trains"
 
-            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd'
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key=e093857d5f6d4f0faa7f0e471aee13dd'
             const response = await fetch(api_url);
             const data = await response.json();
             console.log(data)
@@ -454,7 +454,7 @@ title: train
         async function getNorthboundTrain(station_code) {
             document.getElementById('label1').textContent = "Northbound Trains"
 
-            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=1&api_key%5D=e093857d5f6d4f0faa7f0e471aee13dd'
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=1&api_key=e093857d5f6d4f0faa7f0e471aee13dd'
             const response = await fetch(api_url);
             const data = await response.json();
             //console.log(data)
