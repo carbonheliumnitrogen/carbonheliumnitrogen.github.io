@@ -210,7 +210,7 @@ title: train
         }
 
         async function getHeadsign(trip) {
-            const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key=e093857d5f6d4f0faa7f0e471aee13dd';
+            const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf';
             var head_resp = await fetch(head_url);
             var head_data = await head_resp.json();
             var headsign = head_data.data[0].attributes.headsign;
@@ -242,7 +242,7 @@ title: train
                 'filter[direction_id]': '0', // Towards Harvard
                 'filter[route]': '1', // Route 1
                 'sort': 'departure_time', // Sort by arrival time
-                'api_key': 'e093857d5f6d4f0faa7f0e471aee13dd' // Replace with your actual API key
+                'api_key': '16cfb5bcbae341f9a3e120b6bf11f5bf' // Replace with your actual API key
             });
 
             const response = await fetch(`${url}?${params}`);
@@ -314,10 +314,10 @@ title: train
                 'filter[direction_id]': '1', // Towards Nubian
                 'filter[route]': '1', // Route 1
                 'sort': 'departure_time', // Sort by arrival time
-                'api_key': 'e093857d5f6d4f0faa7f0e471aee13dd' // Replace with your actual API key
+                'api_key': '16cfb5bcbae341f9a3e120b6bf11f5bf' // Replace with your actual API key
             });
 
-            //var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=' + stop_code.toString() + '&filter%5Broute%5D=1&include=stop&sort=departure_time&filter%5Bdirection_id%5D=0&api_key=e093857d5f6d4f0faa7f0e471aee13dd'
+            //var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=' + stop_code.toString() + '&filter%5Broute%5D=1&include=stop&sort=departure_time&filter%5Bdirection_id%5D=0&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf'
             const response = await fetch(`${url}?${params}`);
             const rawdata = await response.json();
             //Some of the bus predictions are not associated with a departure time
@@ -383,7 +383,7 @@ title: train
         async function getSouthboundTrain(station_code) {
             document.getElementById('label2').textContent = "Southbound Trains"
 
-            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key=e093857d5f6d4f0faa7f0e471aee13dd'
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf'
             const response = await fetch(api_url);
             const data = await response.json();
             console.log(data)
@@ -454,7 +454,7 @@ title: train
         async function getNorthboundTrain(station_code) {
             document.getElementById('label1').textContent = "Northbound Trains"
 
-            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=1&api_key=e093857d5f6d4f0faa7f0e471aee13dd'
+            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=1&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf'
             const response = await fetch(api_url);
             const data = await response.json();
             //console.log(data)
