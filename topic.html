@@ -1,0 +1,106 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 50px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .button {
+            background-color: #da291c;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            font-family: 'Computer Modern Sans', 'Sans-Serif';
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #da291c;
+        }
+
+        .button1:hover {
+            background-color: #da291c;
+            color: white;
+        }
+
+        .center {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        font-size: 1em;
+        font-family:'Computer Modern Serif', 'Serif';
+        line-height: 1.2em;
+        color: #111;
+        text-align: justify;
+        font-style: italic;
+        }​
+    </style>
+</head>
+
+<body>
+    <h1>PRG Research Topic Generator</h1>
+    <div class="center" id="result">
+        Click the button to create a research topic...
+    </div>
+
+    <button class="button button1" id="btn1" onclick = "fill()">Generate</button>
+  
+    <script>
+        let textdiv = document.getElementById("result");
+        function fill() {
+            var groupA = 
+                ["Dynamic properties of ",
+                 "Supersonic impact response of ",
+                 "Acoustic response of ",
+                 "Stimuli-responsive ",
+                 "Laser-induced deformation of ",
+                 "Algorithmic generative design of ",
+                 "Simulating the nonlinear response of ",
+                 "Machine learning prediction of ",
+                 "Reconfigurable"];
+            var groupB = 
+                ["self-assembled ", 
+                 "pyrolyzed ",  
+                 "two-photon printed ", 
+                 
+                 ];
+            var groupC = 
+                ["architected grains",
+                "pentamode metamaterials",
+                "braced cubic unit cells",
+                "double-network metamaterials",
+                "interpenetrating phase composites",
+                "woven metamaterials",
+                "spinodal metamaterials",
+                "multilayered heterostructures"
+                ]
+            textdiv.innerHTML = groupA[ Math.floor(  Math.random() * groupA.length ) ] + 
+                                groupB[ Math.floor(  Math.random() * groupB.length ) ] + 
+                                groupC[ Math.floor(  Math.random() * groupC.length ) ] ;
+        }
+    </script>
+</body>
