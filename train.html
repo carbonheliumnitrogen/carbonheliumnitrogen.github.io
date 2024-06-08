@@ -85,9 +85,9 @@ title: train
 
 <body>
     <h1> Red Line Tracker </h1>
-    <p>Information comes directly from the <a href="https://www.mbta.com/developers/v3-api">MBTA API</a>. Please also listen for station announcements - as we know, train status is subject to change at any time.</p>
+    <p>Information comes directly from the <a href="https://www.mbta.com/developers/v3-api">MBTA API</a>. Please also listen for station announcements; train status is subject to change at any time.</p>
     <div id="busDisclaimer" class="busDisc">
-        <em>Disclaimer for bus predictions: </em> The MBTA bus predictions are subject to a high degree of variability and buses may leave up to 30 seconds ahead of schedule. Note when the next scheduled arrival is and have an alternative in mind. (This is known, unfortunately, due to personal experience.)
+        <em>Disclaimer for bus predictions: </em> The MBTA bus predictions are subject to a high degree of variability and buses may leave up to 90 seconds ahead of schedule.
     </div>
     <br>
     <div class="row">
@@ -117,6 +117,7 @@ title: train
     <button class="button button1 btn-to-click" id="test8" onclick="getDTXTrain()">Dtn. Crossing</button>
     <button class="button button1 btn-to-click" id="test9" onclick="getSouthStationTrain()">South Station</button>
     <button class="button2 btn-to-click" id="test10" onclick="getRte1()">Bus Route 1</button>
+    <button class="button2 btn-to-click" id="test11" onclick="getRte7796()">Bus Route 77/96</button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         $(function () {
@@ -203,8 +204,19 @@ title: train
             div.style.display = "none";
         }
         async function getRte1() {
-            getInboundBus(110); //Mass Ave@Holyoke St, see https://api-v3.mbta.com/stops
-            getOutboundBus(97); //77 Mass Ave
+            getInboundBus(110, 1); //Mass Ave@Holyoke St, see https://api-v3.mbta.com/stops
+            getOutboundBus(97, 1); //77 Mass Ave
+            div = document.getElementById('busDisclaimer');
+            div.style.display = "block";
+        }
+
+        async function getRte7796() {
+            getInboundBus(2305, '77,96'); //Mass Ave@Shepard St, see https://api-v3.mbta.com/stops
+            //getInboundBus(2305, '96'); //Mass Ave@Shepard St, see https://api-v3.mbta.com/stops
+
+            getOutboundBus(20761, '77,96'); //Harvard Upper Busway
+            //getOutboundBus(20761, 96); //Harvard Upper Busway
+
             div = document.getElementById('busDisclaimer');
             div.style.display = "block";
         }
@@ -234,13 +246,17 @@ title: train
             //console.log(minutes);
             return [minutes, seconds];
         }
-        async function getOutboundBus(stop_code) {
-            document.getElementById('label2').textContent = "Outbound from 77 Mass Ave"
+        async function getOutboundBus(stop_code, route) {
+            if(stop_code < 1000)
+                document.getElementById('label2').textContent = "Outbound from 77 Mass Ave";
+            else
+                document.getElementById('label2').textContent = "Outbound from Harvard/Upper Busway";
+
             const url = 'https://api-v3.mbta.com/predictions';
             const params = new URLSearchParams({
                 'filter[stop]': stop_code.toString(), // Replace with the correct stop ID
                 'filter[direction_id]': '0', // Towards Harvard
-                'filter[route]': '1', // Route 1
+                'filter[route]': route.toString(), //'1', // Route 1
                 'sort': 'departure_time', // Sort by arrival time
                 'api_key': '16cfb5bcbae341f9a3e120b6bf11f5bf' // Replace with your actual API key
             });
@@ -253,7 +269,9 @@ title: train
 
             try {
                 const date0 = new Date(data[0].attributes.departure_time).toISOString();
-                document.getElementById('sdest0').textContent = 'Route 1 bus for ' + await getHeadsign(data[0].relationships.trip.data.id);
+                const busId = data.length > 0 ? data[0].relationships.route.data.id : '';
+                const busIdString = busId.toString();
+                document.getElementById('sdest0').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[0].relationships.trip.data.id);
                 const diff0 = await getStatus(date0);
                 const diff0m = diff0[0];
                 const diff0s = diff0[1];
@@ -271,7 +289,9 @@ title: train
 
             try {
                 const date1 = new Date(data[1].attributes.departure_time).toISOString();
-                document.getElementById('sdest1').textContent = 'Route 1 bus for ' + await getHeadsign(data[1].relationships.trip.data.id);
+                const busId = data.length > 0 ? data[1].relationships.route.data.id : '';
+                const busIdString = busId.toString();
+                document.getElementById('sdest1').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[1].relationships.trip.data.id);
                 const diff1 = await getStatus(date1);
                 const diff1m = diff1[0];
                 const diff1s = diff1[1];
@@ -289,7 +309,9 @@ title: train
 
             try {
                 const date2 = new Date(data[2].attributes.departure_time).toISOString();
-                document.getElementById('sdest2').textContent = 'Route 1 bus for ' + await getHeadsign(data[2].relationships.trip.data.id);
+                const busId = data.length > 0 ? data[2].relationships.route.data.id : '';
+                const busIdString = busId.toString();
+                document.getElementById('sdest2').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[2].relationships.trip.data.id);
                 const diff2 = await getStatus(date2);
                 const diff2m = diff2[0];
                 const diff2s = diff2[1];
@@ -306,13 +328,17 @@ title: train
             }
         }
 
-        async function getInboundBus(stop_code) {
-            document.getElementById('label1').textContent = "Inbound from Mass Ave/Holyoke St"
-            const url = 'https://api-v3.mbta.com/predictions';
+        async function getInboundBus(stop_code, route) {
+            if(stop_code < 1000)
+                document.getElementById('label1').textContent = "Inbound from Mass Ave/Holyoke St";
+            else
+                document.getElementById('label1').textContent = "Inbound from Mass Ave/Shepard St";
+
+                const url = 'https://api-v3.mbta.com/predictions';
             const params = new URLSearchParams({
                 'filter[stop]': stop_code.toString(), // Replace with the correct stop ID
                 'filter[direction_id]': '1', // Towards Nubian
-                'filter[route]': '1', // Route 1
+                'filter[route]': route.toString(), // '1', // Route 1
                 'sort': 'departure_time', // Sort by arrival time
                 'api_key': '16cfb5bcbae341f9a3e120b6bf11f5bf' // Replace with your actual API key
             });
@@ -325,7 +351,9 @@ title: train
 
             try {
                 const date0 = new Date(data[0].attributes.departure_time).toISOString();
-                document.getElementById('ndest0').textContent = 'Route 1 bus for ' + await getHeadsign(data[0].relationships.trip.data.id);
+                const busId = data.length > 0 ? data[0].relationships.route.data.id : '';
+                const busIdString = busId.toString();
+                document.getElementById('ndest0').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[0].relationships.trip.data.id);
                 const diff0 = await getStatus(date0);
                 const diff0m = diff0[0];
                 const diff0s = diff0[1];
@@ -343,7 +371,9 @@ title: train
 
             try {
                 const date1 = new Date(data[1].attributes.departure_time).toISOString();
-                document.getElementById('ndest1').textContent = 'Route 1 bus for ' + await getHeadsign(data[1].relationships.trip.data.id);
+                const busId = data.length > 0 ? data[1].relationships.route.data.id : '';
+                const busIdString = busId.toString();
+                document.getElementById('ndest1').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[1].relationships.trip.data.id);
                 const diff1 = await getStatus(date1);
                 console.log(diff1)
                 const diff1m = diff1[0];
@@ -362,7 +392,9 @@ title: train
 
             try {
                 const date2 = new Date(data[2].attributes.departure_time).toISOString();
-                document.getElementById('ndest2').textContent = 'Route 1 bus for ' + await getHeadsign(data[2].relationships.trip.data.id);
+                const busId = data.length > 0 ? data[2].relationships.route.data.id : '';
+                const busIdString = busId.toString();
+                document.getElementById('ndest2').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[2].relationships.trip.data.id);
                 const diff2 = await getStatus(date2);
                 console.log(diff2)
                 const diff2m = diff2[0];
