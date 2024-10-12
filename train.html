@@ -16,7 +16,7 @@ title: train
         .column {
             float: left;
             width: 50%;
-            padding: 50px;
+            padding: 40px;
         }
 
         /* Clear floats after the columns */
@@ -105,121 +105,57 @@ title: train
         </div>
     </div>
     <br>
-    <p>To enable auto-refresh (1-sec intervals), select a station below:</p>
-    <!--<button class="button button1" onclick="getAlewifeTrain()">Alewife</button>-->
-    <button class="button button1 btn-to-click" id="test1" onclick="getDavisTrain()">Davis</button>
-    <button class="button button1 btn-to-click" id="test2" onclick="getPorterTrain()">Porter (default) </button>
-    <button class="button button1 btn-to-click" id="test3" onclick="getHarvardTrain()">Harvard</button>
-    <button class="button button1 btn-to-click" id="test4" onclick="getCentralTrain()">Central</button>
-    <button class="button button1 btn-to-click" id="test5" onclick="getKendallTrain()">Kendall</button>
-    <button class="button button1 btn-to-click" id="test6" onclick="getCharlesTrain()">Charles/MGH</button>
-    <button class="button button1 btn-to-click" id="test7" onclick="getParkStTrain()">Park Street</button>
-    <button class="button button1 btn-to-click" id="test8" onclick="getDTXTrain()">Dtn. Crossing</button>
-    <button class="button button1 btn-to-click" id="test9" onclick="getSouthStationTrain()">South Station</button>
-    <button class="button2 btn-to-click" id="test10" onclick="getRte1()">Bus Route 1</button>
-    <button class="button2 btn-to-click" id="test11" onclick="getRte7796()">Bus Route 77/96</button>
+    <p>To see predictions (refreshes every second), select a station below:</p>
+    <!-- <button class="button button1 btn-to-click station-button" data-type = "train" id="test1" data-station = "alfcl">Alewife</button> -->
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test1" data-station = "davis">Davis</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test2" data-station = "portr">Porter </button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test3" data-station = "harsq">Harvard (default)</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test4" data-station = "cntsq">Central</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test5" data-station = "knncl">Kendall</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test6" data-station = "chmnl">Charles/MGH</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test7" data-station = "pktrm">Park Street</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test8" data-station = "dwnxg">Dtn. Crossing</button>
+    <button class="button button1 btn-to-click station-button" data-type = "train" id="test9" data-station = "sstat">South Station</button>
+    <button class="button2 btn-to-click station-button" data-type = "bus" data-station = "rte1" id="test10">Bus Route 1</button>
+    <button class="button2 btn-to-click station-button" data-type = "bus" data-station = "rte77" id="test11">Bus Route 77/96</button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        $(function () {
-            let theTimeout;
-            let clickNo = 0;
-            $(".btn-to-click").on("click", function () {
-                clickNo++;
-                let btnElement = this.getAttribute("id");
-                clearTimeout(theTimeout);
-                theTimeout = setTimeout(() => {
-                    $(`#${btnElement}`).trigger("click");
-                }, 1000);
+        let refreshInterval;
+
+        // Function to start automatic refresh for the selected station
+        function startAutoRefresh(station, type) {
+            // Clear any existing interval
+            clearInterval(refreshInterval);
+
+            // Set a new interval for updating predictions based on type
+            refreshInterval = setInterval(() => {
+                if (type === 'train') {
+                    getTrainPredictions('1', station); // Northbound train predictions
+                    getTrainPredictions('0', station); // Southbound train predictions
+                } else if (type === 'bus') {
+                    if (station === 'rte1') {
+                        getBusPredictions('1', 110, '1') //Inbound, Mass Ave@Holyoke St., Bus Rte 1
+                        getBusPredictions('0', 97, '1')  //Outbound, 77 Mass Ave., Bus Rte 1
+                    } else if (station === 'rte77') {
+                        getBusPredictions('1', 2305, '77', '96'); //Inbound, Mass Ave@Shepard St., Rte 77/96
+                        getBusPredictions('0', 76122, '77', 76121, '96'); //Outbound, Harvard Upper Busway (two berths), Rte 77/96
+                    }
+                }
+            }, 500); // Refresh every 500ms
+        }
+
+        $(document).ready(function() {
+            // Start automatic refresh for Harvard Square on page load
+            startAutoRefresh('harsq', 'train'); // Automatically fetch predictions for Harvard Square Bus
+
+            // Handle button clicks to start auto refresh for clicked station
+            $('.station-button').on('click', function() {
+                const station = $(this).data('station'); // Get the station from data attribute
+                const type = $(this).data('type'); // Get the prediction type (train or bus)
+
+                startAutoRefresh(station, type); // Start the automatic updates for the selected station and type
             });
         });
-
-        async function getAlewifeTrain() {
-            var station_code = 'alfcl';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getDavisTrain() {
-            var station_code = 'davis';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getPorterTrain() {
-            var station_code = 'portr';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getHarvardTrain() {
-            var station_code = 'harsq';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getCentralTrain() {
-            var station_code = 'cntsq';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getKendallTrain() {
-            var station_code = 'knncl';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getCharlesTrain() {
-            var station_code = 'chmnl';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getParkStTrain() {
-            var station_code = 'pktrm';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getDTXTrain() {
-            var station_code = 'dwnxg';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getSouthStationTrain() {
-            var station_code = 'sstat';
-            getSouthboundTrain(station_code);
-            getNorthboundTrain(station_code);
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "none";
-        }
-        async function getRte1() {
-            getInboundBus(110, 1); //Mass Ave@Holyoke St, see https://api-v3.mbta.com/stops
-            getOutboundBus(97, 1); //77 Mass Ave
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "block";
-        }
-
-        async function getRte7796() {
-            getInboundBus(2305, '77,96'); //Mass Ave@Shepard St, see https://api-v3.mbta.com/stops
-            //getInboundBus(2305, '96'); //Mass Ave@Shepard St, see https://api-v3.mbta.com/stops
-
-            getOutboundBus(20761, '77,96'); //Harvard Upper Busway
-            //getOutboundBus(20761, 96); //Harvard Upper Busway
-
-            div = document.getElementById('busDisclaimer');
-            div.style.display = "block";
-        }
 
         async function getHeadsign(trip) {
             const head_url = 'https://api-v3.mbta.com/trips?filter%5Bid%5D=' + trip.toString() + '&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf';
@@ -246,320 +182,119 @@ title: train
             //console.log(minutes);
             return [minutes, seconds];
         }
-        async function getOutboundBus(stop_code, route) {
-            if(stop_code < 1000)
-                document.getElementById('label2').textContent = "Outbound from 77 Mass Ave";
-            else
-                document.getElementById('label2').textContent = "Outbound from Harvard/Upper Busway";
 
+        async function getBusPredictions(direction, ...stopsAndRoutes) {
+            const apiKey = '16cfb5bcbae341f9a3e120b6bf11f5bf';
+            document.getElementById('label1').textContent = "Inbound Buses";
+            document.getElementById('label2').textContent = "Outbound Buses";
+            // Initialize arrays to hold stop codes and routes
+            let stopCodes = [];
+            let routeIds = [];
+
+            // Separate the arguments into stop codes (numbers) and route IDs (strings)
+            stopsAndRoutes.forEach(arg => {
+                if (typeof arg === 'number') stopCodes.push(arg); // Stops are numbers
+                if (typeof arg === 'string') routeIds.push(arg);  // Routes are strings
+            });
+
+            // Construct URL parameters
+            const params = new URLSearchParams({
+                'filter[stop]': stopCodes.join(','),  // Combine stop codes
+                'filter[route]': routeIds.join(','),  // Combine route IDs
+                'filter[direction_id]': direction,     // Use the direction parameter
+                'sort': 'departure_time',              // Sort by departure time
+                'api_key': apiKey
+            });
+
+            // Fetch the data from the MBTA API
             const url = 'https://api-v3.mbta.com/predictions';
-            const params = new URLSearchParams({
-                'filter[stop]': stop_code.toString(), // Replace with the correct stop ID
-                'filter[direction_id]': '0', // Towards Harvard
-                'filter[route]': route.toString(), //'1', // Route 1
-                'sort': 'departure_time', // Sort by arrival time
-                'api_key': '16cfb5bcbae341f9a3e120b6bf11f5bf' // Replace with your actual API key
-            });
-
             const response = await fetch(`${url}?${params}`);
             const rawdata = await response.json();
-            //Some of the bus predictions are not associated with a departure time
-            const data = rawdata.data.filter(pred => pred.attributes.schedule_relationship !== 'SKIPPED' && pred.attributes.departure_time !== null);
-            console.log(data);
 
-            try {
-                const date0 = new Date(data[0].attributes.departure_time).toISOString();
-                const busId = data.length > 0 ? data[0].relationships.route.data.id : '';
-                const busIdString = busId.toString();
-                document.getElementById('sdest0').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[0].relationships.trip.data.id);
-                const diff0 = await getStatus(date0);
-                const diff0m = diff0[0];
-                const diff0s = diff0[1];
-                if (diff0[0] == -999) {
-                    document.getElementById('sstatus0').textContent = 'is now boarding';
-                }
-                else {
-                    document.getElementById('sstatus0').textContent = 'departs in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('sdest0').textContent = 'No more northbound trips found';
-                document.getElementById('sstatus0').textContent = '';
-            }
-
-            try {
-                const date1 = new Date(data[1].attributes.departure_time).toISOString();
-                const busId = data.length > 0 ? data[1].relationships.route.data.id : '';
-                const busIdString = busId.toString();
-                document.getElementById('sdest1').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[1].relationships.trip.data.id);
-                const diff1 = await getStatus(date1);
-                const diff1m = diff1[0];
-                const diff1s = diff1[1];
-                if (diff1[0] == -999) {
-                    document.getElementById('sstatus1').textContent = 'is now boarding';
-                }
-                else {
-                    document.getElementById('sstatus1').textContent = 'departs in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('sdest1').textContent = 'No more northbound trips found';
-                document.getElementById('sstatus1').textContent = '';
-            }
-
-            try {
-                const date2 = new Date(data[2].attributes.departure_time).toISOString();
-                const busId = data.length > 0 ? data[2].relationships.route.data.id : '';
-                const busIdString = busId.toString();
-                document.getElementById('sdest2').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[2].relationships.trip.data.id);
-                const diff2 = await getStatus(date2);
-                const diff2m = diff2[0];
-                const diff2s = diff2[1];
-                if (diff2[0] == -999) {
-                    document.getElementById('sstatus2').textContent = 'is now boarding';
-                }
-                else {
-                    document.getElementById('sstatus2').textContent = 'departs in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('sdest2').textContent = 'No more northbound trips found';
-                document.getElementById('sstatus2').textContent = '';
-            }
-        }
-
-        async function getInboundBus(stop_code, route) {
-            if(stop_code < 1000)
-                document.getElementById('label1').textContent = "Inbound from Mass Ave/Holyoke St";
-            else
-                document.getElementById('label1').textContent = "Inbound from Mass Ave/Shepard St";
-
-                const url = 'https://api-v3.mbta.com/predictions';
-            const params = new URLSearchParams({
-                'filter[stop]': stop_code.toString(), // Replace with the correct stop ID
-                'filter[direction_id]': '1', // Towards Nubian
-                'filter[route]': route.toString(), // '1', // Route 1
-                'sort': 'departure_time', // Sort by arrival time
-                'api_key': '16cfb5bcbae341f9a3e120b6bf11f5bf' // Replace with your actual API key
-            });
-
-            //var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=' + stop_code.toString() + '&filter%5Broute%5D=1&include=stop&sort=departure_time&filter%5Bdirection_id%5D=0&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf'
-            const response = await fetch(`${url}?${params}`);
-            const rawdata = await response.json();
-            //Some of the bus predictions are not associated with a departure time
+            // Filter predictions that are valid (not skipped and have a departure time)
             const data = rawdata.data.filter(pred => pred.attributes.schedule_relationship !== 'SKIPPED' && pred.attributes.departure_time !== null);
 
-            try {
-                const date0 = new Date(data[0].attributes.departure_time).toISOString();
-                const busId = data.length > 0 ? data[0].relationships.route.data.id : '';
-                const busIdString = busId.toString();
-                document.getElementById('ndest0').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[0].relationships.trip.data.id);
-                const diff0 = await getStatus(date0);
-                const diff0m = diff0[0];
-                const diff0s = diff0[1];
-                if (diff0[0] == -999) {
-                    document.getElementById('nstatus0').textContent = 'is now boarding';
-                }
-                else {
-                    document.getElementById('nstatus0').textContent = 'departs in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('ndest0').textContent = 'No more southbound trips found';
-                document.getElementById('nstatus0').textContent = '';
-            }
+            // Limit to next 3 predictions
+            const limitedData = data.slice(0, 3);
 
-            try {
-                const date1 = new Date(data[1].attributes.departure_time).toISOString();
-                const busId = data.length > 0 ? data[1].relationships.route.data.id : '';
-                const busIdString = busId.toString();
-                document.getElementById('ndest1').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[1].relationships.trip.data.id);
-                const diff1 = await getStatus(date1);
-                console.log(diff1)
-                const diff1m = diff1[0];
-                const diff1s = diff1[1];
-                if (diff1[0] == -999) {
-                    document.getElementById('nstatus1').textContent = 'is now boarding';
+            // Update the UI with the next 3 predictions
+            if (limitedData.length > 0) {
+                for (let index = 0; index < limitedData.length; index++) {
+                    await updateBusPrediction(limitedData[index], index, direction === '1'); // true for inbound, false for outbound
                 }
-                else {
-                    document.getElementById('nstatus1').textContent = 'departs in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('ndest1').textContent = 'No more southbound trips found';
-                document.getElementById('nstatus1').textContent = '';
-            }
-
-            try {
-                const date2 = new Date(data[2].attributes.departure_time).toISOString();
-                const busId = data.length > 0 ? data[2].relationships.route.data.id : '';
-                const busIdString = busId.toString();
-                document.getElementById('ndest2').textContent = 'Route ' +busIdString.toString() + ' bus for ' + await getHeadsign(data[2].relationships.trip.data.id);
-                const diff2 = await getStatus(date2);
-                console.log(diff2)
-                const diff2m = diff2[0];
-                const diff2s = diff2[1];
-                if (diff2[0] == -999) {
-                    document.getElementById('nstatus2').textContent = 'is now boarding';
-                }
-                else {
-                    document.getElementById('nstatus2').textContent = 'departs in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('ndest2').textContent = 'No more southbound trips found';
-                document.getElementById('nstatus2').textContent = '';
+            } else {
+                const destId = direction === '1' ? 'ndest0' : 'sdest0';
+                const statusId = direction === '1' ? 'nstatus0' : 'sstatus0';
+                
+                document.getElementById(destId).textContent = 'No more trips found';
+                document.getElementById(statusId).textContent = '';
             }
         }
 
-        async function getSouthboundTrain(station_code) {
-            document.getElementById('label2').textContent = "Southbound Trains"
+        async function updateBusPrediction(prediction, index, isInbound) {
+            const busId = prediction.relationships.route.data.id;
+            const departureTime = new Date(prediction.attributes.departure_time).toISOString();
+            const headsign = await getHeadsign(prediction.relationships.trip.data.id);
+            const status = await getStatus(departureTime);
 
-            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=0&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf'
+            const destId = isInbound ? `ndest${index}` : `sdest${index}`;
+            const statusId = isInbound ? `nstatus${index}` : `sstatus${index}`;
+
+            document.getElementById(destId).textContent = `Route ${busId} bus for ${headsign}`;
+            if (status[0] === -999) {
+                document.getElementById(statusId).textContent = 'is now boarding';
+            } else {
+                document.getElementById(statusId).textContent = `departs in ${status[0]} min ${status[1]} sec`;
+            }
+        }
+
+        async function getTrainPredictions(direction, station_code) {
+            const apiKey = '16cfb5bcbae341f9a3e120b6bf11f5bf';
+            document.getElementById('label1').textContent = "Northbound Trains";
+            document.getElementById('label2').textContent = "Southbound Trains";
+
+            // Construct the API URL directly using the passed-in direction
+            const api_url = `https://api-v3.mbta.com/predictions?filter[stop]=place-${station_code}&filter[route]=Red&filter[direction_id]=${direction}&api_key=${apiKey}`;
+
+            // Fetch the train predictions from the MBTA API
             const response = await fetch(api_url);
             const data = await response.json();
-            console.log(data)
 
-            try {
-                const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
-                document.getElementById('sdest0').textContent = 'Train to ' + await getHeadsign(data.data[0].relationships.trip.data.id);
-                const diff0 = await getStatus(date0);
-                const diff0m = diff0[0];
-                const diff0s = diff0[1];
-                if (diff0[0] == -999) {
-                    document.getElementById('sstatus0').textContent = 'is now boarding';
-                }
-                else if (diff0[0] >= 20) {
-                    document.getElementById('sstatus0').textContent = 'arrives in 20+ minutes';
-                }
-                else {
-                    document.getElementById('sstatus0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('sdest0').textContent = 'No more southbound trips found';
-                document.getElementById('sstatus0').textContent = '';
-            }
+            // Filter predictions that are valid (not skipped and have a departure time)
+            const predictions = data.data.filter(pred => pred.attributes.schedule_relationship !== 'SKIPPED' && pred.attributes.departure_time !== null);
 
-            try {
-                const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
-                document.getElementById('sdest1').textContent = 'Train to ' + await getHeadsign(data.data[1].relationships.trip.data.id);
-                const diff1 = await getStatus(date1);
-                const diff1m = diff1[0];
-                const diff1s = diff1[1];
-                if (diff1[0] == -999) {
-                    document.getElementById('sstatus1').textContent = 'is now boarding';
-                }
-                else if (diff1[0] >= 20) {
-                    document.getElementById('sstatus1').textContent = 'arrives in 20+ minutes';
-                }
-                else {
-                    document.getElementById('sstatus1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('sdest1').textContent = 'No more southbound trips found';
-                document.getElementById('sstatus1').textContent = '';
-            }
+            // Limit to next 3 predictions
+            const limitedPredictions = predictions.slice(0, 3);
 
-            try {
-                const date2 = new Date(data.data[2].attributes.arrival_time).toISOString();
-                document.getElementById('sdest2').textContent = 'Train to ' + await getHeadsign(data.data[2].relationships.trip.data.id);
-                const diff2 = await getStatus(date2);
-                const diff2m = diff2[0];
-                const diff2s = diff2[1];
-                if (diff2[0] == -999) {
-                    document.getElementById('sstatus2').textContent = 'is now boarding';
+            // Update the UI with the next 3 train predictions
+            if (limitedPredictions.length > 0) {
+                for (let index = 0; index < limitedPredictions.length; index++) {
+                    await updateTrainPrediction(limitedPredictions[index], index, direction === '1'); // true for northbound, false for southbound
                 }
-                else if (diff2[0] >= 20) {
-                    document.getElementById('sstatus2').textContent = 'arrives in 20+ minutes';
-                }
-                else {
-                    document.getElementById('sstatus2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('sdest2').textContent = 'No more southbound trips found';
-                document.getElementById('sstatus2').textContent = '';
-            }
-        }
-        async function getNorthboundTrain(station_code) {
-            document.getElementById('label1').textContent = "Northbound Trains"
+            } else {
+                const destId = direction === '1' ? 'ndest0' : 'sdest0';
+                const statusId = direction === '1' ? 'nstatus0' : 'sstatus0';
 
-            var api_url = 'https://api-v3.mbta.com/predictions?filter%5Bstop%5D=place-' + station_code.toString() + '&filter%5Broute%5D=Red&include=stop&filter%5Bdirection_id%5D=1&api_key=16cfb5bcbae341f9a3e120b6bf11f5bf'
-            const response = await fetch(api_url);
-            const data = await response.json();
-            //console.log(data)
-            //console.log(data.data[0].attributes.headsign);
-            //console.log(data.data.length);
-            try {
-                const date0 = new Date(data.data[0].attributes.arrival_time).toISOString();
-
-
-                document.getElementById('ndest0').textContent = 'Train to ' + await getHeadsign(data.data[0].relationships.trip.data.id);
-                const diff0 = await getStatus(date0);
-                const diff0m = diff0[0];
-                const diff0s = diff0[1];
-                if (diff0[0] == -999) {
-                    document.getElementById('nstatus0').textContent = 'is now boarding';
-                }
-                else if (diff0[0] >= 20) {
-                    document.getElementById('nstatus0').textContent = 'arrives in 20+ minutes';
-                }
-                else {
-                    document.getElementById('nstatus0').textContent = 'arrives in ' + diff0m.toString() + ' min ' + diff0s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('ndest0').textContent = 'No more northbound trips found';
-                document.getElementById('nstatus0').textContent = '';
-            }
-
-            try {
-                const date1 = new Date(data.data[1].attributes.arrival_time).toISOString();
-                document.getElementById('ndest1').textContent = 'Train to ' + await getHeadsign(data.data[1].relationships.trip.data.id);
-                const diff1 = await getStatus(date1);
-                const diff1m = diff1[0];
-                const diff1s = diff1[1];
-                if (diff1[0] == -999) {
-                    document.getElementById('nstatus1').textContent = 'is now boarding';
-                }
-                else if (diff1[0] >= 20) {
-                    document.getElementById('nstatus1').textContent = 'arrives in 20+ minutes';
-                }
-                else {
-                    document.getElementById('nstatus1').textContent = 'arrives in ' + diff1m.toString() + ' min ' + diff1s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('ndest1').textContent = 'No more northbound trips found';
-                document.getElementById('nstatus1').textContent = '';
-            }
-
-            try {
-                const date2 = new Date(data.data[2].attributes.arrival_time).toISOString();
-
-                document.getElementById('ndest2').textContent = 'Train to ' + await getHeadsign(data.data[2].relationships.trip.data.id);
-                const diff2 = await getStatus(date2);
-                const diff2m = diff2[0];
-                const diff2s = diff2[1];
-                if (diff2[0] == -999) {
-                    document.getElementById('nstatus2').textContent = 'is now boarding';
-                }
-                else if (diff2[0] >= 20) {
-                    document.getElementById('nstatus2').textContent = 'arrives in 20+ minutes';
-                }
-                else {
-                    document.getElementById('nstatus2').textContent = 'arrives in ' + diff2m.toString() + ' min ' + diff2s.toString() + ' sec';
-                }
-            }
-            catch (error) {
-                document.getElementById('ndest2').textContent = 'No more northbound trips found';
-                document.getElementById('nstatus2').textContent = '';
+                document.getElementById(destId).textContent = 'No more trips found';
+                document.getElementById(statusId).textContent = '';
             }
         }
 
-        getSouthboundTrain('portr');
-        getNorthboundTrain('portr');
+        async function updateTrainPrediction(prediction, index, isNorthbound) {
+            const departureTime = new Date(prediction.attributes.arrival_time).toISOString();
+            const headsign = await getHeadsign(prediction.relationships.trip.data.id);
+            const status = await getStatus(departureTime);
+
+            const destId = isNorthbound ? `ndest${index}` : `sdest${index}`;
+            const statusId = isNorthbound ? `nstatus${index}` : `sstatus${index}`;
+
+            document.getElementById(destId).textContent = `Train to ${headsign}`;
+            if (status[0] === -999) {
+                document.getElementById(statusId).textContent = 'is now boarding';
+            } else {
+                document.getElementById(statusId).textContent = `arrives in ${status[0]} min ${status[1]} sec`;
+            }
+        }
+
     </script>
 </body>
