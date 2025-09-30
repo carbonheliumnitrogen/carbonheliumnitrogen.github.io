@@ -134,7 +134,8 @@ title: train
                     getTrainPredictions('0', station); // Southbound train predictions
                 } else if (type === 'bus') {
                     if (station === 'rte1') {
-                        getBusPredictions('1', 110, '1') //Inbound, Mass Ave@Holyoke St., Bus Rte 1
+                        // getBusPredictions('1', 110, '1') //Inbound, Mass Ave@Holyoke St., Bus Rte 1
+                        getBusPredictions('1', 107, '1') //Inbound, Mass Ave@Dana St., Bus Rte 1
                         getBusPredictions('0', 97, '1')  //Outbound, 77 Mass Ave., Bus Rte 1
                     } else if (station === 'rte77') {
                         getBusPredictions('1', 2305, '77', '96'); //Inbound, Mass Ave@Shepard St., Rte 77/96
