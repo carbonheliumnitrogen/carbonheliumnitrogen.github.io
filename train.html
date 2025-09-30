@@ -121,7 +121,19 @@ title: train
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         let refreshInterval;
+        let currentStation = null;
 
+        const busLabels = {
+            rte1: {
+                inbound: "Inbound Buses from Mass Ave/Bay St",
+                outbound: "Outbound Buses from 77 Mass Ave"
+            },
+            rte77: {
+                inbound: "Inbound Buses from Mass Ave/Shepard St",
+                outbound: "Outbound Buses from Harvard Upper Busway"
+            }
+        };
+        
         // Function to start automatic refresh for the selected station
         function startAutoRefresh(station, type) {
             // Clear any existing interval
@@ -153,7 +165,7 @@ title: train
             $('.station-button').on('click', function() {
                 const station = $(this).data('station'); // Get the station from data attribute
                 const type = $(this).data('type'); // Get the prediction type (train or bus)
-
+                currentStation = station; // For buses, update the station-name
                 startAutoRefresh(station, type); // Start the automatic updates for the selected station and type
             });
         });
@@ -186,8 +198,8 @@ title: train
 
         async function getBusPredictions(direction, ...stopsAndRoutes) {
             const apiKey = '16cfb5bcbae341f9a3e120b6bf11f5bf';
-            document.getElementById('label1').textContent = "Inbound Buses";
-            document.getElementById('label2').textContent = "Outbound Buses";
+            document.getElementById('label1').textContent = busLabels[currentStation].inbound;
+            document.getElementById('label2').textContent = busLabels[currentStation].outbound;
             // Initialize arrays to hold stop codes and routes
             let stopCodes = [];
             let routeIds = [];
