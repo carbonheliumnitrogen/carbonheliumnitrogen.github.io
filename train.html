@@ -117,7 +117,7 @@ title: train
     <button class="button button1 btn-to-click station-button" data-type = "train" id="test8" data-station = "dwnxg">Dtn. Crossing</button>
     <button class="button button1 btn-to-click station-button" data-type = "train" id="test9" data-station = "sstat">South Station</button>
     <button class="button2 btn-to-click station-button" data-type = "bus" data-station = "rte1" id="test10">Bus Route 1</button>
-    <button class="button2 btn-to-click station-button" data-type = "bus" data-station = "rte77" id="test11">Bus Route 77/96</button>
+    <!-- <button class="button2 btn-to-click station-button" data-type = "bus" data-station = "rte77" id="test11">Bus Route 77/96</button> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         let refreshInterval;
@@ -125,12 +125,12 @@ title: train
 
         const busLabels = {
             rte1: {
-                inbound: "Inbound Buses from Mass Ave/Bay St",
-                outbound: "Outbound Buses from 77 Mass Ave"
+                inbound: "Inbound from Mass Ave/Bay St",
+                outbound: "Outbound from 77 Mass Ave"
             },
             rte77: {
-                inbound: "Inbound Buses from Mass Ave/Shepard St",
-                outbound: "Outbound Buses from Harvard Upper Busway"
+                inbound: "Inbound from Mass Ave/Shepard St",
+                outbound: "Outbound from Harvard Upper Busway"
             }
         };
         
