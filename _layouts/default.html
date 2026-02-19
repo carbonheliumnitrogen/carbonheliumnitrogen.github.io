@@ -78,22 +78,22 @@ ul#nlist {
 
     <nav>
         <ul id = "nlist">
-            <li><a href="/" style="color: #dba504">Home</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/projects.html">Projects</a></li>
+            <li><a href="/" class="{% if page.url == '/' %}active{% endif %}" style="color: #dba504">Home</a></li>
+            <li><a href="/about.html" class="{% if page.url == '/about.html' %}active{% endif %}" >About</a></li>
+            <li><a href="/projects.html" class="{% if page.url == '/projects.html' %}active{% endif %}" >Projects</a></li>
             <li class = "dropdown">
-                <a href="#" class="dropbtn">Rocketry</a>
+                <a href="#" class="dropbtn" class="dropbtn {% if page.url contains '/lad' or page.url contains '/seb' %}active{% endif %}">Rocketry</a>
                 <ul class = "dropdown-content">
                     <li><a href="/lad.html">3D-Printed Rockets</a></li>
                     <li><a href="/seb.html">The SEB Story</a></li>
                 </ul>
             </li>
-            <li><a href="/music.html">Music</a></li>
-            <li><a href="/napkin.html">Solid Mechanics Napkin</a></li>
-            <li><a href="/train.html" style="color: #da291c">Red Line</a></li>
+            <li><a href="/music.html" class="{% if page.url == '/music.html' %}active{% endif %}" >Music</a></li>
+            <li><a href="/napkin.html" class="{% if page.url == '/napkin.html' %}active{% endif %}" >Solid Mechanics Napkin</a></li>
+            <li><a href="/train.html" class="{% if page.url == '/train.html' %}active{% endif %}"  style="color: #da291c">Red Line</a></li>
             <li class="spacer"></li>
-            <li><a href="/resume.html">CV</a></li>
-            <li><a href="/teaching.html">Teaching</a></li>
+            <li><a href="/resume.html" class="{% if page.url == '/resume.html' %}active{% endif %}" >CV</a></li>
+            <li><a href="/teaching.html" class="{% if page.url == '/teaching.html' %}active{% endif %}" >Teaching</a></li>
         </ul>
     </nav>
         {{ content }}

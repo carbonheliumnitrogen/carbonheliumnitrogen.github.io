@@ -29,6 +29,10 @@ nav ul li {
     display: inline;
 }
 
+nav a.active {
+    border-bottom: 2px solid #dba504;
+}
+
 ul#nlist {
     display: flex;
     align-items: center;
