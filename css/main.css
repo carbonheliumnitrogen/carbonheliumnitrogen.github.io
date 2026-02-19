@@ -29,8 +29,18 @@ nav ul li {
     display: inline;
 }
 
-nav a.active {
-    border-bottom: 2px solid #dba504;
+nav a {
+    position: relative;
+}
+
+nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
 }
 
 ul#nlist {
