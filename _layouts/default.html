@@ -57,10 +57,17 @@ li a, .dropbtn {
 }
 
 
-ul#nlist li {
-	display: inline;
+ul#nlist {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
+.right-nav {
+    margin-left: auto;
+}
         /* shows sublist on hover */
 </style>
 <body>
@@ -79,9 +86,10 @@ ul#nlist li {
                 </ul>
             </li>
             <li><a href="/music.html">Music</a></li>
-            <li><a href="/resume.html">Resume</a></li>
             <li><a href="/napkin.html">Solid Mechanics Napkin</a></li>
             <li><a href="/train.html" style="color: #da291c">Red Line</a></li>
+            <li class="right-nav"><a href="/resume.html">CV</a></li>
+            <li><a href="/teaching.html">Teaching</a></li>
         </ul>
     </nav>
     <div class="container">
