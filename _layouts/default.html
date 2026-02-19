@@ -71,6 +71,15 @@ ul#nlist {
 }
         /* shows sublist on hover */
 </style>
+<script>
+const hamburger = document.getElementById('hamburger');
+const navList = document.getElementById('nlist');
+
+hamburger.addEventListener('click', () => {
+    navList.classList.toggle('show');
+});
+</script>
+
 <body>
     <header> Andrew Y. Chen
     </header>
@@ -95,6 +104,12 @@ ul#nlist {
             <li><a href="/resume.html" class="{% if page.url == '/resume.html' %}active{% endif %}" >CV</a></li>
             <li><a href="/teaching.html" class="{% if page.url == '/teaching.html' %}active{% endif %}" >Teaching</a></li>
         </ul>
+
+        <div id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
         {{ content }}
 
