@@ -73,10 +73,10 @@ ab {
     color: #da291c;
 }
 nav a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 h1 {
