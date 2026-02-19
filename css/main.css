@@ -25,8 +25,17 @@ nav ul, footer ul {
     font-weight: bold;
 }
 
-nav ul li, footer ul li {
+nav ul li {
     display: inline;
+}
+
+ul#nlist {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
 }
 a {
     text-decoration: none;
