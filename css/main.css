@@ -72,8 +72,11 @@ ab {
     text-decoration: none;
     color: #da291c;
 }
-a:hover {
+nav a:hover {
     text-decoration: underline;
+}
+a:hover {
+    text-decoration: none;
 }
 
 h1 {
